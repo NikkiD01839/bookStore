@@ -3,13 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Administrator Home Page</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <style>
+        div {
+            text-align: center;
+        }
+
         .jumbotron {
             background-color: #f4511e;
             color: #ffffff;
@@ -70,21 +74,17 @@
     </nav>
 
     <div class="jumbotron text-center">
-        <h1 style="text-align: center;">Welcome to the Login Page</h1>
-        <h2 style="text-align: center;">Please Complete the Following Fields</h2>
+        <h1 style="text-align: center;">Welcome Administrator!</h1>
 
-        <form class="form-inline">
-            <div class="input-group">
-                <input type="email" class="form-control" size="50" placeholder="Enter Your Email Address" required>
-                <input type="password" class="form-control" size="50" placeholder="Enter Your Password" required>
+        <h2 style="text-align: center;">Management Options</h2>
+
+        <div>
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-danger">Manage Books</button>
+                <button type="button" class="btn btn-danger">Manage Users</button>
+                <button type="button" class="btn btn-danger">Manage Promotions</button>
             </div>
-        </form>
-        <div class="input-group-btn">
-            <button type="button" class="btn btn-danger">Login</button>
         </div>
-    </div>
-    </div>
-
 </body>
 
 </html>

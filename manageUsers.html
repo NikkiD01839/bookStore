@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Manage Users Page</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -14,6 +14,17 @@
             background-color: #f4511e;
             color: #ffffff;
             padding: 100px 25px;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid black;
+        }
+
+        tr,
+        th {
+            border: 1px solid black;
         }
 
         .navbar {
@@ -70,21 +81,48 @@
     </nav>
 
     <div class="jumbotron text-center">
-        <h1 style="text-align: center;">Welcome to the Login Page</h1>
-        <h2 style="text-align: center;">Please Complete the Following Fields</h2>
+        <h1 style="text-align: center;">Manage Users</h1>
+        <h2>Table of Users</h2>
 
-        <form class="form-inline">
-            <div class="input-group">
-                <input type="email" class="form-control" size="50" placeholder="Enter Your Email Address" required>
-                <input type="password" class="form-control" size="50" placeholder="Enter Your Password" required>
-            </div>
-        </form>
+        <table>
+            <tr>
+                <th>Email Address</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date Joined</th>
+            </tr>
+            <tr>
+                <th>johnsmith57@gmail.com</th>
+                <th>John</th>
+                <th>Smith</th>
+                <th>4/29/2019</th>
+            </tr>
+            <tr>
+                <th>jnd902@yahoo.com</th>
+                <th>Jane</th>
+                <th>Doe</th>
+                <th>2/15/2020</th>
+            </tr>
+            <tr>
+                <th>apt56283@uga.edu</th>
+                <th>Adam</th>
+                <th>Thompson</th>
+                <th>9/2/2018</th>
+            </tr>
+        </table>
+
+        <h2>Actions Available</h2>
+
         <div class="input-group-btn">
-            <button type="button" class="btn btn-danger">Login</button>
+            <button type="button" class="btn btn-danger">Manage Profile</button>
+            <button type="button" class="btn btn-danger">Reset Password</button>
+            <button type="button" class="btn btn-danger">Deactivate User</button>
+            <button type="button" class="btn btn-danger">Reactivate User</button>
+            <button type="button" class="btn btn-danger">Ban User</button>
+            <button type="button" class="btn btn-danger">Unban User</button>
         </div>
-    </div>
-    </div>
 
+    </div>
 </body>
 
 </html>

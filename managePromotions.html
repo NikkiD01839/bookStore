@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Manage Promotions Page</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -14,6 +14,17 @@
             background-color: #f4511e;
             color: #ffffff;
             padding: 100px 25px;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid black;
+        }
+
+        tr,
+        th {
+            border: 1px solid black;
         }
 
         .navbar {
@@ -43,7 +54,6 @@
             color: #fff !important;
         }
     </style>
-
 </head>
 
 <body>
@@ -70,21 +80,38 @@
     </nav>
 
     <div class="jumbotron text-center">
-        <h1 style="text-align: center;">Welcome to the Login Page</h1>
-        <h2 style="text-align: center;">Please Complete the Following Fields</h2>
+        <h1 style="text-align: center;">Manage Promotions</h1>
+        <h2>Available Promotions</h2>
 
-        <form class="form-inline">
-            <div class="input-group">
-                <input type="email" class="form-control" size="50" placeholder="Enter Your Email Address" required>
-                <input type="password" class="form-control" size="50" placeholder="Enter Your Password" required>
-            </div>
-        </form>
+        <table>
+            <tr>
+                <th>Promotion</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <th>Buy 1 Get 1 Free</th>
+                <th>Active</th>
+            </tr>
+            <tr>
+                <th>50% Off Your Purchase</th>
+                <th>Inactive</th>
+            </tr>
+            <tr>
+                <th>25% Off George Orwell Books</th>
+                <th>Active</th>
+            </tr>
+        </table>
+
+        <h2>Actions Available</h2>
+
         <div class="input-group-btn">
-            <button type="button" class="btn btn-danger">Login</button>
+            <button type="button" class="btn btn-danger">Delete Promotion</button>
+            <button type="button" class="btn btn-danger">Create New Promotion</button>
+            <button type="button" class="btn btn-danger">Edit Existing Promotion</button>
+            <button type="button" class="btn btn-danger">Make Promotion Active</button>
+            <button type="button" class="btn btn-danger">Make Promotion Inactive</button>
         </div>
     </div>
-    </div>
-
 </body>
 
 </html>
