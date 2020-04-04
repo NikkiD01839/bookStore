@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Theme Company</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<style>
+    .jumbotron{
+        background-color: #f4511e; /* Orange */
+        color: #ffffff;
+        text-align: center;
+    }
+    .item span {
+        font-style: normal;
+    }
+
+    .navbar {
+         margin-bottom: 0;
+        background-color: #f4511e;
+        z-index: 9999;
+        border: 0;
+        font-size: 12px !important;
+        line-height: 1.42857143 !important;
+        letter-spacing: 4px;
+        border-radius: 0;
+    }
+
+    .navbar li a, .navbar .navbar-brand {
+        color: #fff !important;
+    }
+
+    .navbar-nav li a:hover, .navbar-nav li.active a {
+        color: #f4511e !important;
+        background-color: #fff !important;
+    }
+
+    .navbar-default .navbar-toggle {
+        border-color: transparent;
+        color: #fff !important;
+    }
+
+    body {
+        font: 400 15px Lato, sans-serif;
+        line-height: 1.8;
+        color: #818181;
+    }
+
+    .jumbotron {
+        font-family: Montserrat, sans-serif;
+    }
+
+    .navbar {
+        font-family: Montserrat, sans-serif;
+    }
+
+    footer .glyphicon {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #f4511e;
+    }
+  </style>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Bookstore Website</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#about">LOGIN/REGISTER</a></li>
+          <li><a href="#user">VIEW ACCOUNT</a></li>
+          <li><a href="#services">VIEW CART</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="jumbotron">   
+    <h1>YOUR ACCOUNT</h1>
+    <p>Welcome, Mohammad!</p>
+</div>
+
+<div class="container-fluid bg-grey">
+    <div class="row">
+      <div class="col-sm-5">
+        <h2 class="text-center">Edit Profile</h2>
+        <p><br /></p>
+        <p>
+            <div class="col-sm-10">
+                <p>Name: Mohammad Al-Saad</p>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-default pull-right" type="submit">Change Name</button>
+            </div>
+        </p>
+        <p>
+            <div class="col-sm-10">
+                <p>Email: youremail@uga.edu</p>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-default pull-right" type="submit">Change Email</button>
+            </div>
+        </p>
+        <p>
+            <div class="col-sm-10">
+                <p>Password: ********</p>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-default pull-right" type="submit">Change Password</button>
+            </div>
+        </p>
+        <p>
+            <div class="col-sm-10">
+                <p>Address: 123 Makebelieve Lane, Athens, GA, 30605</p>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-default pull-right" type="submit">Change Address</button>
+            </div>
+        </p>
+        <p>
+            <div class="col-sm-10">
+                <p>Credit Card: VISA ending in 1234</p>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-default pull-right" type="submit">Change Payment Information</button>
+            </div>
+        </p>
+      </div>
+      <div class="col-sm-7">
+        <h2 class="text-center">Your Shopping History</h2>
+        <p><br /></p>
+        <p class ="text-center"><a href ="https://google.com">View Order History</a></p>
+        <p class ="text-center"><a href = "https://google.com">Make A Return</a></p>
+        <p class ="text-center"><a href = "https://google.com">Reorder a Previous Purchase</a></p>
+      </div>
+  </div>
+</div>
+
+<p><br /></p>
+
+    <footer class="container-fluid text-center">
+      <p><br /></p>
+      <a href="#myPage" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+      </a>
+      <p>Bootstrap Theme Modified From: <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
+    </footer>
+
+</body>
+</html>
