@@ -59,15 +59,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="navbar-brand" href="/">Logo</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#services">SERVICES</a></li>
-                    <li><a href="#portfolio">PORTFOLIO</a></li>
-                    <li><a href="#pricing">PRICING</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
+                    <li><a href="/about">ABOUT</a></li>
+                    <li><a href="/services">SERVICES</a></li>
+                    <li><a href="/portfolio">PORTFOLIO</a></li>
+                    <li><a href="/pricing">PRICING</a></li>
+                    <li><a href="/contact">CONTACT</a></li>
                 </ul>
             </div>
         </div>
@@ -77,21 +77,22 @@
         <h1 style="text-align: center;">Welcome to the Registration Page</h1>
         <h2 style="text-align: center;">Please Complete the Following Fields</h2>
 
-        <form class="form-inline">
+        <form class="form-inline" action="" method="post">
             <div class="input-group">
-                <input type="email" class="form-control" size="50" placeholder="Enter Your Email Address" required>
-                <input type="password" class="form-control" size="50" placeholder="Enter a Password" required>
-                <input type="password" class="form-control" size="50" placeholder="Confirm Your Password" required>
-                <input type="fName" class="form-control" size="50" placeholder="Enter Your First Name" required>
-                <input type="nName" class="form-control" size="50" placeholder="Enter Your Last Name" required>
-                <input type="number" class="form-control" size="50" placeholder="Enter Your Credit Card Number">
-                <input type="number" class="form-control" size="50" placeholder="Enter the Expiration Date">
-                <input type="number" class="form-control" size="50" placeholder="Enter the Security Code">
+                <input type="email" name="email" class="form-control" size="50" placeholder="Enter Your Email Address" required>
+                <input type="password" name="password" class="form-control" size="50" placeholder="Enter a Password" required>
+                <input type="password" name="comfirm" class="form-control" size="50" placeholder="Confirm Your Password" required>
+                <input type="text" name="fname" class="form-control" size="50" placeholder="Enter Your First Name" required>
+                <input type="text" name="lname" class="form-control" size="50" placeholder="Enter Your Last Name" required>
+                <input type="number" name="ccnum" class="form-control" size="50" placeholder="Enter Your Credit Card Number">
+                <input type="number" name="expdate" class="form-control" size="50" placeholder="Enter the Expiration Date">
+                <input type="number" name="ccv" class="form-control" size="50" placeholder="Enter the Security Code">
             </div>
-        </form>
+
         <div class="input-group-btn">
-            <button type="button" class="btn btn-danger">Register Account </button>
+            <button type="submit" class="btn btn-danger">Register Account </button>
         </div>
+        </form>
     </div>
 
 </body>

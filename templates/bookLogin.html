@@ -55,15 +55,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="navbar-brand" href="/">Logo</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#services">SERVICES</a></li>
-                    <li><a href="#portfolio">PORTFOLIO</a></li>
-                    <li><a href="#pricing">PRICING</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
+                    <li><a href="/about">ABOUT</a></li>
+                    <li><a href="/services">SERVICES</a></li>
+                    <li><a href="/portfolio">PORTFOLIO</a></li>
+                    <li><a href="/pricing">PRICING</a></li>
+                    <li><a href="/contact">CONTACT</a></li>
                 </ul>
             </div>
         </div>
@@ -73,15 +73,17 @@
         <h1 style="text-align: center;">Welcome to the Login Page</h1>
         <h2 style="text-align: center;">Please Complete the Following Fields</h2>
 
-        <form class="form-inline">
+        <form class="form-inline" action="" method="post">
             <div class="input-group">
-                <input type="email" class="form-control" size="50" placeholder="Enter Your Email Address" required>
-                <input type="password" class="form-control" size="50" placeholder="Enter Your Password" required>
+                <input type="email" name="email" class="form-control" size="50" placeholder="Enter Your Email Address" required>
+                <input type="password" name="password" class="form-control" size="50" placeholder="Enter Your Password" required>
             </div>
-        </form>
+
         <div class="input-group-btn">
-            <button type="button" class="btn btn-danger">Login</button>
+            <button type="submit" class="btn btn-danger">Login</button>
         </div>
+        </form>
+            <a href="/register">Click Here To Register!</a>
     </div>
     </div>
 
