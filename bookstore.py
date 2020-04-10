@@ -1,28 +1,37 @@
-from flask import Flask, render_template, request, session, logging, url_for, redirect
+from flask import Flask, render_template, request, session, logging, url_for, redirect, flash
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+
 from passlib.hash import sha256_crypt
-import mysql.connector
+engine = create_engine("mysql+pymysql://root:password@localhost/bookstore")
 
-bookdb = mysql.connector.connect(host='localhost',
-                                 user='root',
-                                 passwd='password',
-                                 auth_plugin='mysql_native_password',
-                                 database='bookstore')
+db = scoped_session(sessionmaker(bind=engine))
 
-mycursor = bookdb.cursor()
+#engine = create_engine("mysql+pymysql://username:password@localhost/databasename")
+# import mysql.connector
 
-mycursor.execute("SHOW TABLES")
+# mydb = mysql.connector.connect(
+#     host="localhost",
+#     user="root",
+#     passwd="password",  # you workbench local host password
+#     auth_plugin='mysql_native_password',
+#     database='bookstore'
+# )
 
-for table in mycursor:
-    print(table)
+# mycursor = mydb.cursor()
 
-app= Flask(__name__)
+# mycursor.execute("SHOW TABLES")
+# for table in mycursor:
+#     print(table)
 
+app = Flask(__name__)
+
+# homePage
 @app.route("/")
 def home():
     return render_template("bookHome.html")
 
-
-#registration form
+# register
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -35,20 +44,72 @@ def register():
         ccnum = request.form.get("ccnum")
         expdate = request.form.get("expdate")
         ccv = request.form.get("ccv")
+        cctype = request.form.get("cctype")
+        billadd = request.form.get("billadd")
+        
+        #trying to add to paymentCard table in database
+        # if ccnum is "":
+        #     render_template("bookHome.html")
 
-        #if password == confirm:
-            #sql stuff!
+        if password == confirm:
+            db.execute("INSERT INTO users (first_name, last_name, email, pass) VALUES (:fname, :lname, :email, :password)", {
+                       "fname": fname, "lname": lname, "email": email, "password": secure_password})
+            # sqlformula = "INSERT INTO users (first_name, last_name, email, pass) VALUES (%s,%s,%s,%s)"
+            # new_user = (fname, lname, email, secure_password)
+            # mycursor.execute(sqlformula,new_user)
+            db.commit()
+            flash("You are registered. Please login", "success")
+            return redirect(url_for('login'))
+        else:
+            flash("Passwords do not match", "danger")
+            return render_template("bookRegistration.html")
+
     return render_template("bookRegistration.html")
 
-
-#login form
-@app.route("/login",methods=["GET", "POST"])
+# login
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
 
+        emaildata = db.execute("SELECT email FROM users WHERE email=:email", {
+            "email": email}).fetchone()
+        passwordData = db.execute("SELECT pass FROM users WHERE email=:email", {
+                                  "email": email}).fetchone()
+        userTypeData = db.execute("SELECT userType FROM users WHERE email=:email", {
+                                  "email": email}).fetchone()                          
+
+        if emaildata is None:
+            flash("Email not found. Please try again.", "danger")
+            return render_template("bookLogin.html")
+        else:
+            for password_data in passwordData:
+                if sha256_crypt.verify(password, password_data):
+                    session["log"] = True
+                    #login as admin but currently is causing error
+                    if userTypeData is 1:
+                        flash("You are logged in as an admin.")
+                        redirect(url_for('admin'))
+                    flash("You are logged in.")
+                    return render_template("bookHome.html")
+                else:
+                    flash("Incorrect password", "danger")
+                    return render_template("bookLogin.html")
     return render_template("bookLogin.html")
+
+#logout
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("You are logged out", "success")
+    return redirect(url_for('login'))
+
+#admin
+@app.route("/admin")
+def admin():
+    return render_template("bookAdminLogin.html")
+
 
 @app.route("/user", methods=["GET","POST"])
 def account():
@@ -66,4 +127,5 @@ def account():
     return render_template("bookViewAccount.html")
 
 if __name__ == "__main__":
+    app.secret_key = "key"
     app.run(debug=True)
