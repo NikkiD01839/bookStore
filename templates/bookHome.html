@@ -122,16 +122,19 @@
         <a class="navbar-brand" href="/">Bookstore Website</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/login">LOGIN/REGISTER</a></li>
+        <ul class="nav navbar-nav navbar-right">    
+          {% if session.log %}
+          <li><a href="/logout">LOG OUT</a></li>
           <li><a href="/user">VIEW ACCOUNT</a></li>
           <li><a href="/cart">VIEW CART</a></li>
-          <!--<li><a href="#logout">LOG OUT</a></li>-->
+          {% else  %}
+          <li><a href="/login">LOGIN/REGISTER</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>
   </nav>
-
+  
 
 <div class="jumbotron">   
     <h1>Bookstore Website</h1>
@@ -154,6 +157,7 @@
             </div>
         </div>
     </form>
+    {%include "includes/message.html"%}
 </div>
 
 <!--image source URL: https://www.thriftbooks.com/w/twilight-by-stephenie-meyer/248654/item/1226655/?mkwid=vZ8Ajtki%7cdc&pcrid=84403170552&product=1226655&plc=&pgrid=21323627712&ptaid=pla-294817614716&utm_source=google_shopping&utm_content=vZ8Ajtki%7cdc%7cpcrid%7c84403170552%7cpkw%7c%7cpmt%7c%7cproduct%7c1226655%7cslid%7c%7cpgrid%7c21323627712%7cptaid%7cpla-294817614716%7c&gclid=CjwKCAiAy9jyBRA6EiwAeclQhLV4GHhW9l6-fZMZbjlv6Sg2DgpHQVa__VjXyzm6bjimT4f0dvmrRRoCq6sQAvD_BwE#isbn=1904233651&idiq=1226655-->
@@ -163,7 +167,7 @@
     <div class="row text-center">
       <div class="col-sm-4">
         <div class="thumbnail">
-          <img src="twilight.jpg" alt="Twilight Book Cover">
+          <img src="twilight.jpg'" alt="Twilight Book Cover">
           <p><strong>Twilight</strong></p>
           <p>Stephanie Meyer</p>
         </div>
@@ -177,7 +181,7 @@
       </div>
       <div class="col-sm-4">
         <div class="thumbnail">
-          <img src="twilight.jpg" alt="Twilight Book Cover">
+          <img src="twilight.jpg" alt="Twilight Book Cover" class="img">
           <p><strong>Twilight</strong></p>
           <p>Stephanie Meyer</p>
         </div>
