@@ -81,7 +81,7 @@ def register():
             elif request.form.get("cctype"):
                 db.execute()
             elif request.form.get("billadd"):
-                db.execute
+                db.execute()
             db.commit()
             email = request.form['email']
             token = s.dumps(email,salt='email-confirm')
