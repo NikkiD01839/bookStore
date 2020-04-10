@@ -55,7 +55,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Logo</a>
+                <a class="navbar-brand" href="/">Bookstore Website</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
@@ -73,7 +73,7 @@
         <h1 style="text-align: center;">Welcome to the Login Page</h1>
         <h2 style="text-align: center;">Please Complete the Following Fields</h2>
 
-        <form class="form-inline" action="" method="post">
+        <form class="form-inline" action="" method="POST">
             <div class="input-group">
                 <input type="email" name="email" class="form-control" size="50" placeholder="Enter Your Email Address" required>
                 <input type="password" name="password" class="form-control" size="50" placeholder="Enter Your Password" required>
@@ -82,6 +82,7 @@
         <div class="input-group-btn">
             <button type="submit" class="btn btn-danger">Login</button>
         </div>
+        {%include "includes/message.html"%}
         </form>
             <a href="/register">Click Here To Register!</a>
     </div>
