@@ -51,6 +51,13 @@ def register():
         # if ccnum is "":
         #     render_template("bookHome.html")
 
+        emaildata = db.execute("SELECT email FROM users WHERE email=:email", {
+            "email": email}).fetchone()
+
+        if emaildata is not None:
+            flash("Email taken", "danger")
+            return render_template("bookRegistration.html")
+
         if password == confirm:
             db.execute("INSERT INTO users (first_name, last_name, email, pass) VALUES (:fname, :lname, :email, :password)", {
                        "fname": fname, "lname": lname, "email": email, "password": secure_password})
@@ -87,7 +94,7 @@ def login():
             "email": email}).fetchone()
         passwordData = db.execute("SELECT pass FROM users WHERE email=:email", {
                                   "email": email}).fetchone()
-        userTypeData = db.execute("SELECT userType FROM users WHERE email=:email", {
+        userTypeData = db.execute("SELECT userType FROM users WHERE email=:email AND userType=1", {
                                   "email": email}).fetchone()
 
         if emaildata is None:
@@ -97,10 +104,10 @@ def login():
             for password_data in passwordData:
                 if sha256_crypt.verify(password, password_data):
                     session["log"] = True
-                    #login as admin but currently is causing error
-                    if userTypeData == 1:
+                    #login as admin if userTypeData returns a value which it only does if usertype equals 1
+                    if userTypeData != None:
                         flash("You are logged in as an admin.")
-                        redirect(url_for('admin'))
+                        return redirect(url_for('admin'))
                     flash("You are logged in.")
                     session["USER"] = email
                     return render_template("bookHome.html")
