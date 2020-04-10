@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, session, logging, url_for, re
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+from flask_mail import Mail, Message
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
+
 from passlib.hash import sha256_crypt
 engine = create_engine("mysql+pymysql://root:password@localhost/bookstore")
 
@@ -25,6 +28,11 @@ db = scoped_session(sessionmaker(bind=engine))
 #     print(table)
 
 app = Flask(__name__)
+app.config.from_pyfile('config.cfg')
+
+mail = Mail(app)
+
+s = URLSafeTimedSerializer('key')
 
 # homePage
 @app.route("/")
@@ -58,13 +66,34 @@ def register():
             # new_user = (fname, lname, email, secure_password)
             # mycursor.execute(sqlformula,new_user)
             db.commit()
-            flash("You are registered. Please login", "success")
-            return redirect(url_for('login'))
+            email = request.form['email']
+            token = s.dumps(email,salt='email-confirm')
+
+            msg = Message('Confirm Email', sender='4050bookstore@gmail.com', recipients=[email])
+
+            link = url_for('confirm_email', token=token, _external=True)
+            
+            msg.body = 'Your confirmation link is {}'.format(link)
+            mail.send(msg)
+            flash("A confirmation email has been sent. Please confirm your email.", "success")
+            return render_template("bookRegistration.html")
+            
         else:
             flash("Passwords do not match", "danger")
             return render_template("bookRegistration.html")
 
     return render_template("bookRegistration.html")
+
+#confirmation email
+@app.route('/confirm_email/<token>')
+def confirm_email(token):
+    try:
+        email = s.loads(token,salt='email-confirm',max_age=3600)
+        flash("You are registered. Please login", "success")
+        return redirect(url_for('login'))
+    except SignatureExpired:
+        flash("The link has expired. Please login", "danger")
+        return render_template("bookRegistration.html")
 
 # login
 @app.route("/login", methods=["GET", "POST"])
@@ -88,7 +117,7 @@ def login():
                 if sha256_crypt.verify(password, password_data):
                     session["log"] = True
                     #login as admin but currently is causing error
-                    if userTypeData is 1:
+                    if userTypeData == 1:
                         flash("You are logged in as an admin.")
                         redirect(url_for('admin'))
                     flash("You are logged in.")
