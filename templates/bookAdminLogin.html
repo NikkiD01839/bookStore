@@ -59,7 +59,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="navbar-brand" href="#">Bookstore Website</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
@@ -68,6 +68,9 @@
                     <li><a href="#portfolio">PORTFOLIO</a></li>
                     <li><a href="#pricing">PRICING</a></li>
                     <li><a href="#contact">CONTACT</a></li>
+                    {% if session.log %}
+                    <li><a href="/logout">LOG OUT</a></li>
+                    {% else %}
                 </ul>
             </div>
         </div>
@@ -85,6 +88,7 @@
                 <button type="button" class="btn btn-danger">Manage Promotions</button>
             </div>
         </div>
+        {%include "includes/message.html"%}
 </body>
 
 </html>
