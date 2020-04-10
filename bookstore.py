@@ -46,7 +46,7 @@ def register():
         ccv = request.form.get("ccv")
         cctype = request.form.get("cctype")
         billadd = request.form.get("billadd")
-        
+
         #trying to add to paymentCard table in database
         # if ccnum is "":
         #     render_template("bookHome.html")
@@ -57,6 +57,16 @@ def register():
             # sqlformula = "INSERT INTO users (first_name, last_name, email, pass) VALUES (%s,%s,%s,%s)"
             # new_user = (fname, lname, email, secure_password)
             # mycursor.execute(sqlformula,new_user)
+            if request.form.get("ccnum"):
+                db.execute()
+            elif request.form.get("expdate"):
+                db.execute()
+            elif request.form.get("ccv"):
+                db.execute()
+            elif request.form.get("cctype"):
+                db.execute()
+            elif request.form.get("billadd"):
+                db.execute
             db.commit()
             flash("You are registered. Please login", "success")
             return redirect(url_for('login'))
@@ -78,7 +88,7 @@ def login():
         passwordData = db.execute("SELECT pass FROM users WHERE email=:email", {
                                   "email": email}).fetchone()
         userTypeData = db.execute("SELECT userType FROM users WHERE email=:email", {
-                                  "email": email}).fetchone()                          
+                                  "email": email}).fetchone()
 
         if emaildata is None:
             flash("Email not found. Please try again.", "danger")
@@ -88,10 +98,11 @@ def login():
                 if sha256_crypt.verify(password, password_data):
                     session["log"] = True
                     #login as admin but currently is causing error
-                    if userTypeData is 1:
+                    if userTypeData == 1:
                         flash("You are logged in as an admin.")
                         redirect(url_for('admin'))
                     flash("You are logged in.")
+                    session["USER"] = email
                     return render_template("bookHome.html")
                 else:
                     flash("Incorrect password", "danger")
