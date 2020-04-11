@@ -157,6 +157,30 @@ def logout():
 def admin():
     return render_template("bookAdminLogin.html")
 
+#admin
+@app.route("/forget_password", methods=["GET", "POST"])
+def forget_password():
+    if request.form.get("email"):
+        email = request.form['email']
+    
+        emaildata = db.execute("SELECT email FROM users WHERE email=:email", {
+            "email": email}).fetchone()
+
+        if emaildata is None:
+            flash("Email not found. Please try again.", "danger")
+            return render_template("forgetPassword.html")
+        else:
+            new_password = sha256_crypt.encrypt(str('new_password'))
+            db.execute("UPDATE users SET pass=:password WHERE email=:email", {"password":new_password,"email":email})
+            db.commit()
+            msg = Message('Forget Password', sender='4050bookstore@gmail.com', recipients=[email])
+            msg.body = 'Your new password is: new_password'
+
+            mail.send(msg)
+            flash("Your password was sent to your email.", "success")
+            return redirect(url_for('login'))
+    return render_template("forgetPassword.html")
+
 
 @app.route("/user", methods=["GET","POST"])
 def account():
