@@ -84,9 +84,9 @@
                 <input type="password" name="confirm" class="form-control" size="50" placeholder="Confirm Your Password" required>
                 <input type="text" name="fname" class="form-control" size="50" placeholder="Enter Your First Name" required>
                 <input type="text" name="lname" class="form-control" size="50" placeholder="Enter Your Last Name" required>
-                <input type="number" name="ccnum" class="form-control" size="50" placeholder="Enter Your Credit Card Number">
-                <input type="number" name="expdate" class="form-control" size="50" placeholder="Enter the Expiration Date">
-                <input type="number" name="ccv" class="form-control" size="50" placeholder="Enter the Security Code">
+                <input type="text" name="ccnum" class="form-control" size="50" placeholder="Enter Your Credit Card Number" pattern="[0-9]{13,19}">
+                <input type="text" name="expdate" class="form-control" size="50" placeholder="Enter the Expiration Date(Format: MM/YYYY)" pattern="(0[1-9]|1[0-2])\/[0-9]{4}">
+                <input type="text" name="ccv" class="form-control" size="50" placeholder="Enter the Security Code" pattern="[0-9]{3}">
                 <input type="text" name="cctype" class="form-control" size="50" placeholder="Enter the Type of Card">
                 <input type="text" name="billadd" class="form-control" size="50" placeholder="Enter the Billing Address">
             </div>
