@@ -38,8 +38,29 @@ create table paymentCard(
 );
 
 UPDATE users
-SET usertype = 1
-WHERE id = 1;
+SET status = "Active"
+where id = 14;
 
 SELECT * FROM bookstore.userTypes;
 SELECT * FROM bookstore.users;
+
+DELETE FROM paymentcard
+WHERE userId = 26;
+
+DELETE FROM users
+WHERE email = "sssalewala@gmail.com";
+
+ALTER TABLE users
+DROP COLUMN status;
+
+ALTER TABLE users
+ADD COLUMN  status varchar(25) NOT NULL
+Default "Active"
+AFTER pass;
+
+ALTER TABLE users
+ALTER status SET DEFAULT 'Inactive';
+
+SELECT status 
+FROM users 
+WHERE email='sssalewala@gmail.com' AND status='Inactive';
