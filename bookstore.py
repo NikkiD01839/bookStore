@@ -19,7 +19,7 @@ db = scoped_session(sessionmaker(bind=engine))
 #     passwd="password",  # you workbench local host password
 #     auth_plugin='mysql_native_password',
 #     database='bookstore'
-# )
+# ) 
 
 # mycursor = mydb.cursor()
 
@@ -91,8 +91,8 @@ def register():
 
             msg.body = 'Your confirmation link is {}'.format(link)
             mail.send(msg)
-            flash(
-                "A confirmation email has been sent. Please confirm your email.", "success")
+            session["email"] = email
+            flash("A confirmation email has been sent. Please confirm your email.", "success")
             return render_template("bookRegistration.html")
 
         else:
@@ -105,11 +105,14 @@ def register():
 @app.route('/confirm_email/<token>')
 def confirm_email(token):
     try:
+        email = session["email"]
+        db.execute("UPDATE users SET status = 'Active' WHERE email=:email", {"email":email})
+        db.commit()
         email = s.loads(token, salt='email-confirm', max_age=3600)
         flash("You are registered. Please login", "success")
         return redirect(url_for('login'))
     except SignatureExpired:
-        flash("The link has expired. Please login", "danger")
+        flash("The link has expired. Please register again.", "danger")
         return render_template("bookRegistration.html")
 
 # login
@@ -125,9 +128,14 @@ def login():
                                   "email": email}).fetchone()
         userTypeData = db.execute("SELECT userType FROM users WHERE email=:email AND userType=1", {
                                   "email": email}).fetchone()
+        status = db.execute("SELECT status FROM users WHERE email=:email AND status='Inactive'", {
+                                  "email": email}).fetchone()
 
         if emaildata is None:
             flash("Email not found. Please try again.", "danger")
+            return render_template("bookLogin.html")
+        elif status is not None:
+            flash("Please confirm you account through your email.", "danger")
             return render_template("bookLogin.html")
         else:
             for password_data in passwordData:
@@ -157,7 +165,7 @@ def logout():
 def admin():
     return render_template("bookAdminLogin.html")
 
-# admin
+# forget password
 @app.route("/forget_password", methods=["GET", "POST"])
 def forget_password():
     if request.form.get("email"):
