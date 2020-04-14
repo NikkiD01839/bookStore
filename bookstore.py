@@ -50,9 +50,11 @@ def register():
         confirm = request.form.get("confirm")
         secure_password = sha256_crypt.encrypt(str(password))
         ccnum = request.form.get("ccnum")
+        secure_ccnum = sha256_crypt.encrypt(str(ccnum))
         expdate = request.form.get("expdate")
         ccv = request.form.get("ccv")
         cctype = request.form.get("cctype")
+
         billadd = request.form.get("billadd")
 
         # trying to add to paymentCard table in database
@@ -78,7 +80,7 @@ def register():
                                     "email": email}).fetchone()
                 name_on_card = fname + " " + lname
 
-                db.execute("INSERT INTO paymentcard (cardNumber, type, exp_date, bill_add, name_on_card, ccv, userId) VALUES (:ccnum, :cctype, :expdate, :billadd, :name_on_card, :ccv, :userId)", {"ccnum": ccnum, "cctype": cctype, "expdate": expdate, "billadd": billadd, "name_on_card": name_on_card, "ccv": ccv, "userId": userId[0]})
+                db.execute("INSERT INTO paymentcard (cardNumber, type, exp_date, bill_add, name_on_card, ccv, userId) VALUES (:ccnum, :cctype, :expdate, :billadd, :name_on_card, :ccv, :userId)", {"ccnum": secure_ccnum, "cctype": cctype, "expdate": expdate, "billadd": billadd, "name_on_card": name_on_card, "ccv": ccv, "userId": userId[0]})
                 db.commit()
 
             email = request.form['email']
@@ -233,8 +235,9 @@ def account():
             print(request.form.get("cardType"))
         elif request.form.get("ccnum"):
             ccnum = request.form.get("ccnum")
+            secure_ccnum = sha256_crypt.encrypt(str(ccnum))
             db.execute("UPDATE paymentcard SET cardNumber=:ccnum WHERE userId=:userId", {
-                       "ccnum": ccnum, "userId": userId[0]})
+                       "ccnum": secure_ccnum, "userId": userId[0]})
             db.commit()
             print(request.form.get("ccnum"))
         elif request.form.get("ccv"):
