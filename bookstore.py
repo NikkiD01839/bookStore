@@ -110,7 +110,7 @@ def confirm_email(token):
         email = session["email"]
         db.execute("UPDATE users SET status = 'Active' WHERE email=:email", {"email":email})
         db.commit()
-        email = s.loads(token, salt='email-confirm', max_age=3600)
+        email = s.loads(token, salt='email-confirm')
         flash("You are registered. Please login", "success")
         return redirect(url_for('login'))
     except SignatureExpired:
