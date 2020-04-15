@@ -19,7 +19,7 @@ db = scoped_session(sessionmaker(bind=engine))
 #     passwd="password",  # you workbench local host password
 #     auth_plugin='mysql_native_password',
 #     database='bookstore'
-# ) 
+# )
 
 # mycursor = mydb.cursor()
 
@@ -80,7 +80,8 @@ def register():
                                     "email": email}).fetchone()
                 name_on_card = fname + " " + lname
 
-                db.execute("INSERT INTO paymentcard (cardNumber, type, exp_date, bill_add, name_on_card, ccv, userId) VALUES (:ccnum, :cctype, :expdate, :billadd, :name_on_card, :ccv, :userId)", {"ccnum": secure_ccnum, "cctype": cctype, "expdate": expdate, "billadd": billadd, "name_on_card": name_on_card, "ccv": ccv, "userId": userId[0]})
+                db.execute("INSERT INTO paymentcard (cardNumber, type, exp_date, bill_add, name_on_card, ccv, userId) VALUES (:ccnum, :cctype, :expdate, :billadd, :name_on_card, :ccv, :userId)", {
+                           "ccnum": secure_ccnum, "cctype": cctype, "expdate": expdate, "billadd": billadd, "name_on_card": name_on_card, "ccv": ccv, "userId": userId[0]})
                 db.commit()
 
             email = request.form['email']
@@ -94,7 +95,8 @@ def register():
             msg.body = 'Your confirmation link is {}'.format(link)
             mail.send(msg)
             session["email"] = email
-            flash("A confirmation email has been sent. Please confirm your email.", "success")
+            flash(
+                "A confirmation email has been sent. Please confirm your email.", "success")
             return render_template("bookRegistration.html")
 
         else:
@@ -108,7 +110,8 @@ def register():
 def confirm_email(token):
     try:
         email = session["email"]
-        db.execute("UPDATE users SET status = 'Active' WHERE email=:email", {"email":email})
+        db.execute("UPDATE users SET status = 'Active' WHERE email=:email", {
+                   "email": email})
         db.commit()
         email = s.loads(token, salt='email-confirm')
         flash("You are registered. Please login", "success")
@@ -131,7 +134,7 @@ def login():
         userTypeData = db.execute("SELECT userType FROM users WHERE email=:email AND userType=1", {
                                   "email": email}).fetchone()
         status = db.execute("SELECT status FROM users WHERE email=:email AND status='Inactive'", {
-                                  "email": email}).fetchone()
+            "email": email}).fetchone()
 
         if emaildata is None:
             flash("Email not found. Please try again.", "danger")
@@ -193,13 +196,40 @@ def forget_password():
             return redirect(url_for('login'))
     return render_template("forgetPassword.html")
 
+# change password
+@app.route("/change_password", methods=["GET", "POST"])
+def change_password():
+    email = session['USER']
+    password = request.form.get("oldpassword")
+    newpassword = request.form.get("newpassword1")
+    confirmpassword = request.form.get("newpassword2")
 
+    passwordData = db.execute("SELECT pass FROM users WHERE email=:email", {
+        "email": email}).fetchone()
+
+    if sha256_crypt.encrypt(str(password)) == passwordData:
+        if newpassword is confirmpassword:
+            secure_password = sha256_crypt.encrypt(str(newpassword))
+            db.execute("UPDATE users SET pass=:password WHERE email=:email", {
+                        "password": secure_password, "email": email})
+            db.commit()
+            flash("Your password has been changed.", "success")
+            return render_template("bookViewAccount.html")
+        else:
+            flash("Passwords do not match.", "danger")
+            return render_template("changePassword.html")
+    else:
+        flash("Incorrect password", "danger")
+
+    return render_template("changePassword.html")
+
+# view/edit profile
 @app.route("/user", methods=["GET", "POST"])
 def account():
     if request.method == "POST":
         email = session["USER"]
         userId = db.execute("SELECT id FROM users WHERE email=:email", {
-                                    "email": email}).fetchone()
+            "email": email}).fetchone()
         if request.form.get("fname"):
             fname = request.form.get("fname")
             db.execute("UPDATE users SET first_name=:fname WHERE email=:email", {
@@ -214,13 +244,13 @@ def account():
             print(request.form.get("lname"))
         elif request.form.get("email"):
             print(request.form.get("email"))
-        elif request.form.get("password"):
-            password = request.form.get("password")
-            secure_password = sha256_crypt.encrypt(str(password))
-            db.execute("UPDATE users SET pass=:password WHERE email=:email", {
-                       "password": secure_password, "email": email})
-            db.commit()
-            print(request.form.get("password"))
+        # elif request.form.get("password"):
+        #     password = request.form.get("password")
+            # secure_password = sha256_crypt.encrypt(str(password))
+            # db.execute("UPDATE users SET pass=:password WHERE email=:email", {
+            #            "password": secure_password, "email": email})
+            # db.commit()
+        #     print(request.form.get("password"))
         elif request.form.get("address"):
             address = request.form.get("address")
             db.execute("UPDATE paymentcard SET bill_add=:address WHERE userId=:userId", {
