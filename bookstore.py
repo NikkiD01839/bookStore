@@ -207,8 +207,9 @@ def change_password():
     passwordData = db.execute("SELECT pass FROM users WHERE email=:email", {
         "email": email}).fetchone()
 
-    if sha256_crypt.encrypt(str(password)) == passwordData:
-        if newpassword is confirmpassword:
+
+    if sha256_crypt.verify(password, passwordData[0]):
+        if newpassword == confirmpassword:
             secure_password = sha256_crypt.encrypt(str(newpassword))
             db.execute("UPDATE users SET pass=:password WHERE email=:email", {
                         "password": secure_password, "email": email})
