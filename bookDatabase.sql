@@ -130,7 +130,25 @@ INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_locat
 VALUES("Through the Looking Glass", "Lewis Carroll", 8.50, 5, "Childrens", 978-1450593267,
 "Alice has another fantastical adventure.", "lookingglass.jpg");
 
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("The Hunger Games", "Suzanne Collins", 12.99, 4.7, "Adventure", 978-0439023481,
+"12 districts are forced to send young adults to compete in a survival game. The one who wins gets fame and glory. Those who don’t die.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/hungergames.jpg");
 
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Insurgent", "Veronica Roth", 12.99, 4.5, "Science Fiction", 978-1594138539,
+"Sequel to Divergent, it continues the story of Tris Prior, who must now save those that she loves as war has broken out between the factions.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/insurgent.jpg");
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Jurassic Park", "Michael Crichton", 17.98, 4.7, "Science Fiction", 978-0345538987,
+"Newly cloned dinosaurs now roam around Jurassic Park! People from around the world come to see them until something goes wrong", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/jurassicpark.jpg");
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Horton Hears a Who!", "Dr. Seuss", 9.99, 5, "Childrens", 978-0394800783,
+"Horton, the lovable elephant, tries to protect tiny creatures on a speck of dust.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/Horton.jpg");
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("The Lorax", "Dr. Seuss", 11.89, 5, "Childrens", 978-0394823379,
+"I am the Lorax. I speak for the trees.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/thelorax.jpg");
 
 
 
