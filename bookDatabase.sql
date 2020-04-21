@@ -43,6 +43,26 @@ create table books(
     pic_location varchar(255)
 );
 
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES ("1984", "George Orwell", 13.99, 5, "Dystopian Political Fiction", 978-0452262935, 
+"A story about a dystopian future where a totalitarian super-state watches your every move.", "1984.jpg")
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Animal Farm", "George Orwell", 9.99, 5, "Animal Fable/Political Satire", 978-0151002177,
+"A story about an animal revolution and how some animals are more equal than others.", "animalfarm.jpg")
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Brave New World", "Aldous Huxley", 17.99, 4 stars, "Science/Dystopian Fiction", 978-0062696120, 
+"A story about what life would be like if it were pain-free, and thus, meaningless.", "bravenewworld.jpg")
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Catch-22", "Joseph Heller", 12.99, 4, "Satire", 978-3596125722, 
+"A story about the paradoxical reality of war.", "catch22.jpg")
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Fahrenheit 451", "Ray Bradbury", 21.99, 4.5, "Dystopian", 978-1,451673265,
+"A story about burning books.", "fahrenheit451.jpg")
+
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location) 
 VALUES ("Uncle Tom's Cabin","Harriet Beecher Stowe", 19.99, 3.5, "Novel", 24158, 
 "The narrative drive of Stowe's classic novel is often overlooked in the heat of the controversies surrounding 
