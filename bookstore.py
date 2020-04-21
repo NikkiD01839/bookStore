@@ -279,6 +279,11 @@ def account():
             print(request.form.get("ccnum"))
     return render_template("bookViewAccount.html")
 
+# viewBooks
+@app.route("/viewBooks")
+def viewBooks():
+    data = db.execute("SELECT title,author,pic_location FROM books").fetchall()
+    return render_template("bookViewBooks.html",data=data)
 
 if __name__ == "__main__":
     app.secret_key = "key"
