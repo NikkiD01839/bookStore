@@ -110,7 +110,25 @@ adventures -- duels at dawn, fierce battles with pirates at sea, and impossible 
 -- Diego de la Vega, a.k.a. Zorro, returns to America to reclaim the hacienda on which 
 he was raised and to seek justice for all who cannot fight for it themselves.", "zorro.jpg");
 
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Pride and Prejudice", "Jane Austen", 7.99, 5, "Romantic Novel", 978-0486284736,
+"Elizabeth Bennett is quick to dislike Mr.Darcy who has an acerbic wit. The two butt heads and eventually fall in love.", "prideprejudice.jpg");
 
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("The Odyssey", "Homer", 10.00, 4.3, "Epic Poetry", 978-0140268867,
+"Odysseus endures many trials on his journey back to Ithaca.", "odyssey.jpg");
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Pygmalion", "George Bernard Shaw", 4.99, 4.5, "Romantic Comedy", 978-0486282220,
+"Eliza Doolittle learns how to be a cultured gentlewoman.", "pygmalion.jpg");
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Twilight", "Stephanie Meyer", 1.99, 4, "Young Adult Fiction", 978-0316015844,
+"Bella Swan is your average girl who doesn't know she's actually beautiful. Edward Cullen is an immortal being who sparkles in the sunlight, and this makes him a monster. Romance ensues.", "twilight.jpg");
+
+INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Through the Looking Glass", "Lewis Carroll", 8.50, 5, "Childrens", 978-1450593267,
+"Alice has another fantastical adventure.", "lookingglass.jpg");
 
 
 
