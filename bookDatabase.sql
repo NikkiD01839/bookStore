@@ -69,18 +69,18 @@ VALUES ("Uncle Tom's Cabin","Harriet Beecher Stowe", 19.99, 3.5, "Novel", 24158,
 its anti-slavery sentiments. In fact, it is a compelling adventure story with richly drawn characters and has 
 earned a place in both literary and American history. Stowe's puritanical religious beliefs show up in the novel's 
 final, overarching theme—the exploration of the nature of Christianity and how Christian theology is fundamentally 
-incompatible with slavery.", "cabin.jpg");
+incompatible with slavery.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/cabin.jpg");
 
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location) 
 VALUES ("Where the Wild Things Are","Maurice Sendak", 15.99, 4, "Fiction", 12356, 
 "Max, a wild and naughty boy, is sent to bed without his supper by his exhausted mother. In his room, he imagines 
-sailing far away to a land of Wild Things. Instead of eating him, the Wild Things make Max their king.", "wild.jpg");
+sailing far away to a land of Wild Things. Instead of eating him, the Wild Things make Max their king.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/wild.jpg");
 
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location) 
 VALUES ("A Wrinkle in Time (Time Quintet)","Madeleine L'Engle", 21.99, 4, "Fiction", 25689, 
 "It was a dark and stormy night; Meg Murry, her small brother Charles Wallace, and her 
 mother had come down to the kitchen for a midnight snack when they were upset by the 
-arrival of a most disturbing stranger.", "time.jpg");
+arrival of a most disturbing stranger.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/time.jpg");
 
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location) 
 VALUES ("Young Adolf","Beryl Bainbridge", 17.99, 3.21, "Biography", 519556, 
@@ -94,7 +94,7 @@ the future dictator, such as his brother Edwin or his half-sister Angela
 characters are Meyer, the Jewish landlord and future friend of Adolf, Mary O’Leary,
  another tenant, Dr Kephalus, a somewhat mysterious doctor and friend of Meyer’s, 
  Mr Dupont, a guest at the Adelphi Hotel, and the “bearded man”, who is in fact 
- Mrs O’Leary’s husband. ", "adolf.jpg");
+ Mrs O’Leary’s husband. ", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/adolf.jpg");
 
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location) 
 VALUES ("Zorro","Isabel Allende", 19.99, 3.76, "Fiction", 561651, 
@@ -108,7 +108,7 @@ devoted to helping the powerless and the poor. Between the New World and the Old
 persona of Zorro is formed, a great hero is born, and the legend begins. After many
 adventures -- duels at dawn, fierce battles with pirates at sea, and impossible rescues
 -- Diego de la Vega, a.k.a. Zorro, returns to America to reclaim the hacienda on which 
-he was raised and to seek justice for all who cannot fight for it themselves.", "zorro.jpg");
+he was raised and to seek justice for all who cannot fight for it themselves.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/zorro.jpg");
 
 INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Pride and Prejudice", "Jane Austen", 7.99, 5, "Romantic Novel", 978-0486284736,
