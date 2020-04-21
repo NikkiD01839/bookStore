@@ -80,13 +80,10 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          {% if session.log %}
           <li><a href="/logout">LOG OUT</a></li>
           <li><a href="/user">VIEW ACCOUNT</a></li>
           <li><a href="/cart">VIEW CART</a></li>
-          {% else  %}
           <li><a href="/login">LOGIN/REGISTER</a></li>
-          {% endif %}
         </ul>
       </div>
     </div>
