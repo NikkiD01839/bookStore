@@ -227,57 +227,66 @@ def change_password():
 # view/edit profile
 @app.route("/user", methods=["GET", "POST"])
 def account():
+    email = session['USER']
+    
+    userId = db.execute("SELECT id FROM users WHERE email=:email", {
+            "email": email}).fetchone()
+    address = db.execute("SELECT bill_add FROM paymentcard WHERE userId=:userId", {"userId": userId[0]}).fetchone()
+
+    if address is None:
+        data = db.execute("SELECT * FROM users WHERE email=:email", {"email": email}).fetchall()
+    else:
+        data = db.execute("SELECT * FROM users,paymentcard WHERE users.id=paymentcard.userid and users.email=:email", {
+        "email": email}).fetchall()
+    
     if request.method == "POST":
         email = session["USER"]
-        userId = db.execute("SELECT id FROM users WHERE email=:email", {
-            "email": email}).fetchone()
+        
         if request.form.get("fname"):
             fname = request.form.get("fname")
             db.execute("UPDATE users SET first_name=:fname WHERE email=:email", {
                        "fname": fname, "email": email})
             db.commit()
-            print(request.form.get("fname"))
+            flash("First name updated", "success")
+            return redirect(url_for('account'))
         elif request.form.get("lname"):
             lname = request.form.get("lname")
             db.execute("UPDATE users SET last_name=:lname WHERE email=:email", {
                        "lname": lname, "email": email})
             db.commit()
-            print(request.form.get("lname"))
-        elif request.form.get("email"):
-            print(request.form.get("email"))
-        # elif request.form.get("password"):
-        #     password = request.form.get("password")
-            # secure_password = sha256_crypt.encrypt(str(password))
-            # db.execute("UPDATE users SET pass=:password WHERE email=:email", {
-            #            "password": secure_password, "email": email})
-            # db.commit()
-        #     print(request.form.get("password"))
+            flash("Last name updated", "success")
+            return redirect(url_for('account'))
         elif request.form.get("address"):
             address = request.form.get("address")
             db.execute("UPDATE paymentcard SET bill_add=:address WHERE userId=:userId", {
                        "address": address, "userId": userId[0]})
             db.commit()
-            print(request.form.get("address"))
+            flash("Address updated", "success")
+            return redirect(url_for('account'))
         elif request.form.get("cardType"):
             cardType = request.form.get("cardType")
             db.execute("UPDATE paymentcard SET type=:cardType WHERE userId=:userId", {
                        "cardType": cardType, "userId": userId[0]})
             db.commit()
-            print(request.form.get("cardType"))
+            flash("Card type updated", "success")
+            return redirect(url_for('account'))
         elif request.form.get("ccnum"):
             ccnum = request.form.get("ccnum")
             secure_ccnum = sha256_crypt.encrypt(str(ccnum))
             db.execute("UPDATE paymentcard SET cardNumber=:ccnum WHERE userId=:userId", {
                        "ccnum": secure_ccnum, "userId": userId[0]})
             db.commit()
-            print(request.form.get("ccnum"))
+            flash("Card number updated", "success")
+            return redirect(url_for('account'))
         elif request.form.get("ccv"):
             ccv = request.form.get("ccv")
             db.execute("UPDATE paymentcard SET ccv=:ccv WHERE userId=:userId", {
                        "ccv": ccv, "userId": userId[0]})
             db.commit()
-            print(request.form.get("ccnum"))
-    return render_template("bookViewAccount.html")
+            flash("CCV updated", "success")
+            return redirect(url_for('account'))
+
+    return render_template("bookViewAccount.html",data=data)
 
 # viewBooks
 @app.route("/viewBooks")
