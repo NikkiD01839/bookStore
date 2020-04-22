@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>View Account</title>
   <meta charset="utf-8">
@@ -10,55 +11,60 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 </head>
+
 <body>
 
-<style>
-    .jumbotron{
-        background-color: #f4511e; /* Orange */
-        color: #ffffff;
-        text-align: center;
+  <style>
+    .jumbotron {
+      background-color: #f4511e;
+      /* Orange */
+      color: #ffffff;
+      text-align: center;
     }
+
     .item span {
-        font-style: normal;
+      font-style: normal;
     }
 
     .navbar {
-         margin-bottom: 0;
-        background-color: #f4511e;
-        z-index: 9999;
-        border: 0;
-        font-size: 12px !important;
-        line-height: 1.42857143 !important;
-        letter-spacing: 4px;
-        border-radius: 0;
+      margin-bottom: 0;
+      background-color: #f4511e;
+      z-index: 9999;
+      border: 0;
+      font-size: 12px !important;
+      line-height: 1.42857143 !important;
+      letter-spacing: 4px;
+      border-radius: 0;
     }
 
-    .navbar li a, .navbar .navbar-brand {
-        color: #fff !important;
+    .navbar li a,
+    .navbar .navbar-brand {
+      color: #fff !important;
     }
 
-    .navbar-nav li a:hover, .navbar-nav li.active a {
-        color: #f4511e !important;
-        background-color: #fff !important;
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a {
+      color: #f4511e !important;
+      background-color: #fff !important;
     }
 
     .navbar-default .navbar-toggle {
-        border-color: transparent;
-        color: #fff !important;
+      border-color: transparent;
+      color: #fff !important;
     }
 
     body {
-        font: 400 15px Lato, sans-serif;
-        line-height: 1.8;
-        color: #818181;
+      font: 400 15px Lato, sans-serif;
+      line-height: 1.8;
+      color: #818181;
     }
 
     .jumbotron {
-        font-family: Montserrat, sans-serif;
+      font-family: Montserrat, sans-serif;
     }
 
     .navbar {
-        font-family: Montserrat, sans-serif;
+      font-family: Montserrat, sans-serif;
     }
 
     footer .glyphicon {
@@ -68,7 +74,7 @@
     }
   </style>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -80,123 +86,166 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
+          {% if session.log %}
           <li><a href="/logout">LOG OUT</a></li>
           <li><a href="/user">VIEW ACCOUNT</a></li>
           <li><a href="/cart">VIEW CART</a></li>
+          {% else  %}
           <li><a href="/login">LOGIN/REGISTER</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>
   </nav>
 
-
-<div class="jumbotron">
+  <div class="jumbotron">
     <h1>YOUR ACCOUNT</h1>
     <p>Welcome Back!</p>
-</div>
-{%include "includes/message.html"%}
-<div class="container-fluid bg-grey">
+  </div>
+
+  {%include "includes/message.html"%}
+
+  <div class="container-fluid bg-grey">
     <div class="row">
       <div class="col-sm-5">
         <h2 class="text-center">Edit Profile</h2>
         <p><br /></p>
+        {% for item in data %}
         <p>
-          <form class="form-inline" action="" method="post".>
+          <form class="form-inline" action="" method="post" .>
             <div class="col-sm-10">
-                <input type = "text" name="fname" value="Big Boy"/>
+              <input type="text" name="fname" value="{{item[1]}}" />
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-default pull-right" type="submit">Change First Name</button>
+              <button class="btn btn-default pull-right" type="submit">Change First Name</button>
             </div>
           </form>
         </p>
         <p>
-          <form class="form-inline" action="" method="post".>
+          <form class="form-inline" action="" method="post" .>
             <div class="col-sm-10">
-                <input type = "text" name="lname" value="Boy"/>
+              <input type="text" name="lname" value="{{item[2]}}" />
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-default pull-right" type="submit">Change Last Name</button>
+              <button class="btn btn-default pull-right" type="submit">Change Last Name</button>
             </div>
           </form>
         </p>
         <p>
-          <form class="form-inline" action="" method="post".>
+          <form class="form-inline" action="" method="post" .>
             <div class="col-sm-10">
-                <input type = "text" name="email" value="thisisanemail@email.com"/>
+              <label>{{item[3]}}</label>
             </div>
           </form>
         </p>
         <p>
-          <form class="form-inline" action="/change_password" method="post".>
+          <form class="form-inline" action="/change_password" method="post" .>
             <div class="col-sm-10">
-                <input type = "password" name="password" value="*******"/>
+              <!-- <input type="password" name="password" value="{{item[4]}}" /> -->
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-default pull-right" type="submit">Change Password</button>
+              <button class="btn btn-default pull-right" type="submit">Change Password</button>
             </div>
           </form>
         </p>
         <p>
-          <form class="form-inline" action="" method="post".>
+          <form class="form-inline" action="" method="post" .>
             <div class="col-sm-10">
-                <input type = "text" name="address" value="123 Makebelieve Lane, Athens, GA 30605"/>
+              <input type="text" name="address" value="{{item[11]}}" />
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-default pull-right" type="submit">Change Address</button>
+              <button class="btn btn-default pull-right" type="submit">Change Address</button>
+            </div>
+          </form>
+        </p>
+
+
+        <p>
+          <form class="form-inline" action="" method="post" .>
+            <div class="col-sm-10">
+              <input type="text" name="cardType" value="{{item[9]}}" />
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-default pull-right" type="submit">Change Card Type</button>
             </div>
           </form>
         </p>
         <p>
-          <form class="form-inline" action="" method="post".>
+          <form class="form-inline" action="" method="post" .>
             <div class="col-sm-10">
-                <input type = "text" name="cardType" value="VISA"/>
+              <input type="text" name="ccnum" value="{{item[8]}}" />
             </div>
             <div class="col-sm-2">
-                <button class="btn btn-default pull-right" type="submit">Change Card Type</button>
+              <button class="btn btn-default pull-right" type="submit">Change Number</button>
             </div>
           </form>
+        </p>
         <p>
-          <form class="form-inline" action="" method="post".>
+          <form class="form-inline" action="" method="post" .>
             <div class="col-sm-10">
-                <input type = "text" name="ccnum" value="1234567887654321"/>
+              <input type="text" name="ccv" value="{{item[13]}}" />
             </div>
             <div class="col-sm-2">
+              <button class="btn btn-default pull-right" type="submit">Change CCV</button>
+            </div>
+          </form>
+        </p>
+        {% endfor %}
+
+        <!-- <p>
+          <form class="form-inline" action="" method="post" .>
+            <div class="col-sm-10">
+              <input type="text" name="cardType" value="VISA" />
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-default pull-right" type="submit">Change Card Type</button>
+            </div>
+          </form>
+          <p>
+            <form class="form-inline" action="" method="post" .>
+              <div class="col-sm-10">
+                <input type="text" name="ccnum" value="1234567887654321" />
+              </div>
+              <div class="col-sm-2">
                 <button class="btn btn-default pull-right" type="submit">Change Number</button>
-            </div>
-          </form>
-        <p>
-          <form class="form-inline" action="" method="post".>
-            <div class="col-sm-10">
-                <input type = "text" name="ccv" value="123"/>
-            </div>
-            <div class="col-sm-2">
-                <button class="btn btn-default pull-right" type="submit">Change CCV</button>
-            </div>
-          </form>
-        </p>
-        </p>
-        </p>
+              </div>
+            </form>
+            <p>
+              <form class="form-inline" action="" method="post" .>
+                <div class="col-sm-10">
+                  <input type="text" name="ccv" value="123" />
+                </div>
+                <div class="col-sm-2">
+                  <button class="btn btn-default pull-right" type="submit">Change CCV</button>
+                </div>
+              </form>
+            </p>
+          </p>
+        </p> -->
+
+
       </div>
       <div class="col-sm-7">
         <h2 class="text-center">Your Shopping History</h2>
         <p><br /></p>
-        <p class ="text-center"><a href ="https://google.com">View Order History</a></p>
-        <p class ="text-center"><a href = "https://google.com">Make A Return</a></p>
-        <p class ="text-center"><a href = "https://google.com">Reorder a Previous Purchase</a></p>
+        <p class="text-center"><a href="https://google.com">View Order History</a></p>
+        <p class="text-center"><a href="https://google.com">Make A Return</a></p>
+        <p class="text-center"><a href="https://google.com">Reorder a Previous Purchase</a></p>
       </div>
+    </div>
   </div>
-</div>
 
-<p><br /></p>
+  <p><br /></p>
 
-    <footer class="container-fluid text-center">
-      <p><br /></p>
-      <a href="#myPage" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-      </a>
-      <p>Bootstrap Theme Modified From: <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
-    </footer>
+  <footer class="container-fluid text-center">
+    <p><br /></p>
+    <a href="#myPage" title="To Top">
+      <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>Bootstrap Theme Modified From: <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a>
+    </p>
+  </footer>
 
 </body>
+
 </html>
