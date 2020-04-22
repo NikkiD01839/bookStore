@@ -27,7 +27,7 @@ VALUES ("adminFirst","adminLast","admin@gmail.com","admin", 1);
 
 create table paymentCard(
 	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-    cardNumber varchar(25) NOT NULL,
+    cardNumber varchar(255) NOT NULL,
     type varchar(25) NOT NULL,
     exp_date varchar(25) NOT NULL,
     bill_add varchar(255) NOT NULL,
