@@ -21,7 +21,7 @@ INSERT INTO userTypes (type_id, type_name) VALUES (2, "Customer");
 
 create table paymentCard(
 	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-    cardNumber varchar(25) NOT NULL,
+    cardNumber varchar(255) NOT NULL,
     type varchar(25) NOT NULL,
     exp_date varchar(25) NOT NULL,
     bill_add varchar(255) NOT NULL,
