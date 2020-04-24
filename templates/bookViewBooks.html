@@ -63,10 +63,13 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
+                    {% if session.log %}
                     <li><a href="/logout">LOG OUT</a></li>
                     <li><a href="/user">VIEW ACCOUNT</a></li>
                     <li><a href="/cart">VIEW CART</a></li>
+                    {% else  %}
                     <li><a href="/login">LOGIN/REGISTER</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -75,9 +78,10 @@
     <div class="container-fluid bg-grey">
         <div class="thumbnail">
             <a href="bookViewBook.html">
-                <img src="https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/twilight.jpg" alt="Twilight Book Cover">
-                    <p><strong>Twilight</strong></p>
-                    <p>Stephanie Meyer</p>
+                <img src="https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/twilight.jpg"
+                    alt="Twilight Book Cover">
+                <p><strong>Twilight</strong></p>
+                <p>Stephanie Meyer</p>
             </a>
         </div>
         <hr>
@@ -85,17 +89,17 @@
 
     {% for item in data %}
     <div class="container-fluid bg-grey"></div>
-        <div class="thumbnail">
-            <a href="bookViewBook.html">
-                <img src ={{item[0]}} alt={{item[0]}}>
-                <p><strong>{{item[1]}}</strong></p>
-                <p>{{item[2]}}</p> 
-            </a>
-        </div>
-        <hr>
+    <div class="thumbnail">
+        <a href="/viewBook/{{item[0]}}">
+            <img src={{item[2]}} alt={{item[0]}}>
+            <p><strong>{{item[0]}}</strong></p>
+            <p>{{item[1]}}</p>
+        </a>
+    </div>
+    <hr>
     </div>
     {% endfor %}
 
 </body>
-c
+
 </html>
