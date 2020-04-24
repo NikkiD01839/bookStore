@@ -294,6 +294,12 @@ def viewBooks():
     data = db.execute("SELECT title,author,pic_location FROM books").fetchall()
     return render_template("bookViewBooks.html",data=data)
 
+# book details
+@app.route("/viewBook/<title>", methods=["GET", "POST"])
+def viewBook(title):
+    data = db.execute("SELECT title,author,pic_location FROM books WHERE title=:title", {"title" : title}).fetchall()
+    return render_template("bookViewBook.html", data=data)
+
 if __name__ == "__main__":
     app.secret_key = "key"
     app.run(debug=True)
