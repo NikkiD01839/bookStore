@@ -1,178 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Bootstrap Theme Company</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <title>Bootstrap Theme Company</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 </head>
+
 <body>
 
-<style>
-    .jumbotron{
-        background-color: #f4511e; /* Orange */
-        color: #ffffff;
-        text-align: center;
-    }
-    .thumbnail {
-        padding: 0 0 15px 0;
-        border: none;
-        border-radius: 0;
-    }
+    <style>
+        .jumbotron {
+            background-color: #f4511e;
+            /* Orange */
+            color: #ffffff;
+            text-align: center;
+        }
 
-    .thumbnail img {
-        width: 100%;
-        height: 100%;
-        margin-bottom: 10px;
-    }
-    .carousel-control.right, .carousel-control.left {
-        background-image: none;
-        color: #f4511e;
-    }
+        .thumbnail {
+            padding: 0 0 15px 0;
+            border: none;
+            border-radius: 0;
+        }
 
-    .carousel-indicators li {
-        border-color: #f4511e;
-    }
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 10px;
+        }
 
-    .carousel-indicators li.active {
-        background-color: #f4511e;
-    }
+        .carousel-control.right,
+        .carousel-control.left {
+            background-image: none;
+            color: #f4511e;
+        }
 
-    .item h4 {
-        font-size: 19px;
-        line-height: 1.375em;
-        font-weight: 400;
-        font-style: italic;
-        margin: 70px 0; 
-    }
+        .carousel-indicators li {
+            border-color: #f4511e;
+        }
 
-    .item span {
-        font-style: normal;
-    }
+        .carousel-indicators li.active {
+            background-color: #f4511e;
+        }
 
-    .navbar {
-         margin-bottom: 0;
-        background-color: #f4511e;
-        z-index: 9999;
-        border: 0;
-        font-size: 12px !important;
-        line-height: 1.42857143 !important;
-        letter-spacing: 4px;
-        border-radius: 0;
-    }
+        .item h4 {
+            font-size: 19px;
+            line-height: 1.375em;
+            font-weight: 400;
+            font-style: italic;
+            margin: 70px 0;
+        }
 
-    .navbar li a, .navbar .navbar-brand {
-        color: #fff !important;
-    }
+        .item span {
+            font-style: normal;
+        }
 
-    .navbar-nav li a:hover, .navbar-nav li.active a {
-        color: #f4511e !important;
-        background-color: #fff !important;
-    }
+        .navbar {
+            margin-bottom: 0;
+            background-color: #f4511e;
+            z-index: 9999;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+        }
 
-    .navbar-default .navbar-toggle {
-        border-color: transparent;
-        color: #fff !important;
-    }
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: #fff !important;
+        }
 
-    body {
-        font: 400 15px Lato, sans-serif;
-        line-height: 1.8;
-        color: #818181;
-    }
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #f4511e !important;
+            background-color: #fff !important;
+        }
 
-    .jumbotron {
-        font-family: Montserrat, sans-serif;
-    }
+        .navbar-default .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+        }
 
-    .navbar {
-        font-family: Montserrat, sans-serif;
-    }
+        body {
+            font: 400 15px Lato, sans-serif;
+            line-height: 1.8;
+            color: #818181;
+        }
 
-    footer .glyphicon {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #f4511e;
-    }
+        .jumbotron {
+            font-family: Montserrat, sans-serif;
+        }
 
-    #card-text{
-        background-color:#818181;
-    }
+        .navbar {
+            font-family: Montserrat, sans-serif;
+        }
 
-    div.relative {
-        position: relative;
-        left: 30px;
-        border: 3px solid #73AD21;
-    }
-  </style>
+        footer .glyphicon {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #f4511e;
+        }
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Bookstore Website</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#about">LOGIN/REGISTER</a></li>
-          <li><a href="#user">VIEW ACCOUNT</a></li>
-          <li><a href="#services">VIEW CART</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+        #card-text {
+            background-color: #818181;
+        }
 
+        div.relative {
+            position: relative;
+            left: 30px;
+            border: 3px solid #73AD21;
+        }
+    </style>
 
-<div class="jumbotron">   
-    <h1>Bookstore Website</h1>
-    <p>This is a bookstore where you can buy stuff!</p>
-    <form class = "form-inline">
-        <div class="input-group">
-            <input type="search" class="form-control" size="50" placeholder="Search for Book" required>
-            <div class="input-group-btn">
-                <button type= "button" class= "btn btn-danger">Search</button>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Bookstore Website</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about">LOGIN/REGISTER</a></li>
+                    <li><a href="#user">VIEW ACCOUNT</a></li>
+                    <li><a href="#services">VIEW CART</a></li>
+                </ul>
             </div>
         </div>
-    </form>
-</div>
+    </nav>
 
-<div class="col-lg-4">
-    <img class="card-img-top img-fluid" src="twilight.jpg" alt="Twilight Book Cover">
-</div>
-<div class="col-lg-8">
-    <h3 class="card-title">Twilight </h3>
-    <p>by <u>Stephanie Meyer</u></p>
-            <h4>$10.99</h4>
-            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-            4.0 stars   
+
+    <div class="jumbotron">
+        <h1>Bookstore Website</h1>
+        <p>This is a bookstore where you can buy stuff!</p>
+        <form class="form-inline">
+            <div class="input-group">
+                <input type="search" class="form-control" size="50" placeholder="Search for Book" required>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-danger">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-4">
+        <img class="card-img-top img-fluid" src="twilight.jpg" alt="Twilight Book Cover">
+    </div>
+    <div class="col-lg-8">
+        <h3 class="card-title">Twilight </h3>
+        <p>by <u>Stephanie Meyer</u></p>
+        <h4>$10.99</h4>
+        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+        4.0 stars
+        <p><br /></p>
+        <div><button type="button" class="button">Add To Cart</button></div>
+        <div>
             <p><br /></p>
-            <div><button type= "button" class="button">Add To Cart</button></div>     
-            <div>
-                <p><br /></p>
-                <p>Bella Swan is just a clumsy gal who has no personality. 
-                She is not like other girls, and is gorgeous but doesn't even know it! 
-                Then she meets Edward, who sparkles in the sunlight and that makes him a monster. 
+            <p>Bella Swan is just a clumsy gal who has no personality.
+                She is not like other girls, and is gorgeous but doesn't even know it!
+                Then she meets Edward, who sparkles in the sunlight and that makes him a monster.
                 What will happen? Stalking is on the table, but definitely no premarital relations.</p>
-            </div>   
-</div>
+        </div>
+    </div>
 
-<div class= "col-lg-12">
-    <p><br /></p>
-    <footer class="container-fluid text-center">
-        <a href="#myPage" title="To Top">
-          <span class="glyphicon glyphicon-chevron-up"></span>
-        </a>
-        <p>Bootstrap Theme Modified From: <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
-      </footer>
-</div>
+    {% for item in data %}
 
+    <img src={{item[2]}} alt={{item[0]}}>
+    <p><strong>{{item[0]}}</strong></p>
+    <p>{{item[1]}}</p>
 
+    <hr>
 
+    {% endfor %}
+
+    <div class="col-lg-12">
+        <p><br /></p>
+        <footer class="container-fluid text-center">
+            <a href="#myPage" title="To Top">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+            <p>Bootstrap Theme Modified From: <a href="https://www.w3schools.com"
+                    title="Visit w3schools">www.w3schools.com</a></p>
+        </footer>
+    </div>
+
+    
