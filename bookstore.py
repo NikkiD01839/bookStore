@@ -300,6 +300,25 @@ def viewBook(title):
     data = db.execute("SELECT title,author,pic_location FROM books WHERE title=:title", {"title" : title}).fetchall()
     return render_template("bookViewBook.html", data=data)
 
+#add book
+@app.route("/addBook", methods=["GET", "POST"])
+def addBook():
+    if request.method == "POST":
+        title = request.form.get("title")
+        author = request.form.get("author")
+        price = request.form.get("price")
+        rating = request.form.get("rating")
+        genre = request.form.get("genre")
+        isbn = request.form.get("isbn")
+
+        db.execute("INSERT INTO books (title, author, price, rating, genre, isbn) VALUES (:title, :author, :price, :rating, :genre, :isbn)",
+                   {
+                       "title": title, "author": author, "price": price, "rating": rating, "genre": genre, "isbn": isbn})
+        flash("Book Added", "success")
+    return render_template("addBook.html")
+
+
+
 if __name__ == "__main__":
     app.secret_key = "key"
     app.run(debug=True)
