@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 </head>
+
 <body>
   <style>
     .jumbotron {
@@ -22,6 +23,10 @@
 
     .item span {
       font-style: normal;
+    }
+
+    .grid {
+      display: grid;
     }
 
     .navbar {
@@ -64,7 +69,7 @@
     .navbar {
       font-family: Montserrat, sans-serif;
       text-align: center;
-  
+
     }
 
     footer .glyphicon {
@@ -73,7 +78,7 @@
       color: #f4511e;
     }
   </style>
-  
+
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -102,45 +107,66 @@
     <h1>VIEW CART</h1>
   </div>
   {%include "includes/message.html"%}
+  <div class="grid">
+    <div class="container-fluid bg-grey">
+      {% for item in data %}
 
-  <div class="container-fluid bg-grey">
-    {% for item in data %}
-
-    <div class="col-lg-4">
-      <img class="card-img-top img-fluid" src={{item[0][2]}} alt={{item[0][0]}}>
-    </div>
-    <div class="col-lg-8">
-      <h3 class="card-title">
-        <p><strong>{{item[0][0]}}</strong></p>
-      </h3>
-      <h4>{{item[0][1]}}</h4>
-      <p><br /></p>
-      <form action="/removeFromCart/{{item[0][0]}}" method="POST">
-        <div><button type="submit" class="button">Remove From Cart</button></div>
-      </form>
-      <div>
-        <p><br /></p>
+      <div class="col-lg-4">
+        <img class="card-img-top img-fluid" src={{item[0][2]}} alt={{item[0][0]}}>
       </div>
-
+      <div class="col-lg-8">
+        <h3 class="card-title">
+          <p><strong>{{item[0][0]}}</strong></p>
+        </h3>
+        <h4>{{item[0][1]}}</h4>
+        <p><br /></p>
+        <form action="/removeFromCart/{{item[0][0]}}" method="POST">
+          <div><button type="submit" class="button">Remove From Cart</button></div>
+        </form>
+      </div>
+      <p><br /></p>
     </div>
+
+  </div>
+
+  {% endfor %}
+
+  <div class="grid">
+    <div class="container-fluid bg-grey">
+      {% for item in data %}
+
+      <div class="col-lg-4">
+        <img class="card-img-top img-fluid" src={{item[0][2]}} alt={{item[0][0]}}>
+      </div>
+      <div class="col-lg-8">
+        <h3 class="card-title">
+          <p><strong>{{item[0][0]}}</strong></p>
+        </h3>
+        <h4>{{item[0][1]}}</h4>
+        <p><br /></p>
+        <form action="/removeFromCart/{{item[0][0]}}" method="POST">
+          <div><button type="submit" class="button">Remove From Cart</button></div>
+        </form>
+      </div>
+      <p><br /></p>
     </div>
 
-    {% endfor %}
+  </div>
 
-    
-
-    </div>
-    <h3>Promo Code: </h3>
-    <input type="text" id="promo" name="promo" value="PROMOCODE">
-    <input type="button" id="promoenter" name="promoenter" value="enter">
-    <h2>Total Price: {{total}}</h2>
+  {% endfor %}
 
 
-    <form action="/paymentInfo">
+  <h3>Promo Code: </h3>
+  <input type="text" id="promo" name="promo" value="PROMOCODE">
+  <input type="button" id="promoenter" name="promoenter" value="enter">
+  <h2>Total Price: {{total}}</h2>
+
+
+  <form action="/paymentInfo">
     <p><button class="btn" type="submit">Proceed To Purchase</button></p>
-    </form>
+  </form>
 
-    <p><br /></p>
+  <p><br /></p>
 
 </body>
 
