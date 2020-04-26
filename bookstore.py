@@ -34,6 +34,7 @@ mail = Mail(app)
 
 s = URLSafeTimedSerializer('key')
 
+
 # homePage
 @app.route("/")
 def home():
