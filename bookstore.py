@@ -331,6 +331,10 @@ def addBook():
         flash("Book Added", "success")
     return render_template("addBook.html")
 
+#manage books
+@app.route("/manageBooks", methods=["GET", "POST"])
+def manageBooks():
+    return render_template("manageBooks.html")
 
 
 if __name__ == "__main__":
