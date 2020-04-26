@@ -127,19 +127,25 @@
         </div>
         <hr>
         <h2 style="text-align: center;">OR</h2> -->
+        {%include "includes/message.html"%}
 
         <h3>Fill in Card Details:</h3>
 
         <form class="form-inline">
             <div class="input-group">
-                <input type="cardNo" class="form-control" size="50" placeholder="Enter Your Card Number" required>
-                <input type="cardHolder" class="form-control" size="50" placeholder="Enter Cardholder's Name" required>
-                <input type="expDate" class="form-control" size="50" placeholder="Enter Experation Date" required>
-                <input type="secNo" class="form-control" size="50" placeholder="Enter Security Number" required>
+                <input type="text" name="ccnum" class="form-control" size="50" placeholder="Enter Your Credit Card Number" pattern="[0-9]{13,19}">
+                <input type="text" name="expdate" class="form-control" size="50" placeholder="Enter the Expiration Date(Format: MM/YYYY)" pattern="(0[1-9]|1[0-2])\/[0-9]{4}">
+                <input type="text" name="ccv" class="form-control" size="50" placeholder="Enter the Security Code" pattern="[0-9]{3}">
+                <input type="text" name="cctype" class="form-control" size="50" placeholder="Enter the Type of Card">
+                <input type="text" name="billadd" class="form-control" size="50" placeholder="Enter the Billing Address">
+                <input type="text" name="shipadd" class="form-control" size="50" placeholder="Enter the Shipping Address">
+            </div>
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-danger">Purchase Now</button>
             </div>
         </form>
 
-        <h3>Fill in Address Details</h3>
+        <!-- <h3>Fill in Address Details</h3>
 
         <form class="form-inline">
             <div class="input-group">
@@ -149,7 +155,7 @@
                 <input type="country" class="form-control" size="50" placeholder="Enter Country" required>
                 <input type="zip" class="form-control" size="50" placeholder="Enter Zipcode" required>
             </div>
-        </form>
+        </form> -->
 
     </div>
 
