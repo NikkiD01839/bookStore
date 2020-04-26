@@ -34,7 +34,6 @@ mail = Mail(app)
 
 s = URLSafeTimedSerializer('key')
 
-
 # homePage
 @app.route("/")
 def home():
@@ -366,6 +365,21 @@ def cart():
                       
     return render_template("viewCart.html", data=data)
 
+# view remove from cart
+@app.route("/removeFromCart/<title>", methods=["GET", "POST"])
+def removeFromCart(title):
+    # email = session['USER']
+    # userId = db.execute("SELECT id FROM users WHERE email=:email", {
+    #     "email": email}).fetchone()
+    # bookId = db.execute("SELECT id FROM books WHERE title=:title", {
+    #     "title": title}).fetchone()
+    # data = db.execute("SELECT title,author,pic_location,price,rating,synopsis,genre,ISBN FROM books WHERE title=:title", {
+    #                   "title": title}).fetchall()
+    # db.execute("INSERT INTO cart (userId, bookId) VALUES (:userId, :bookId)", {"userId": userId[0], "bookId": bookId[0]})
+    # db.commit()
+    # flash("Book added to Cart", "success")
+    # return render_template("viewCart.html", data=data)
+    pass
 
 if __name__ == "__main__":
     app.secret_key = "key"
