@@ -74,115 +74,39 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#services">SERVICES</a></li>
-                    <li><a href="#portfolio">PORTFOLIO</a></li>
-                    <li><a href="#pricing">PRICING</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
+                    {% if session.log %}
+                    <li><a href="/logout">LOG OUT</a></li>
+                    <li><a href="/user">VIEW ACCOUNT</a></li>
+                    <li><a href="/cart">VIEW CART</a></li>
+                    {% else  %}
+                    <li><a href="/login">LOGIN/REGISTER</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="jumbotron text-center">
-        <h1 style="text-align: center;">Manage Books</h1>
-        <h2>Available Books</h2><br>
-
-        <div class="col-lg-4">
-            <img class="card-img-top img-fluid"
-                src="https://images-na.ssl-images-amazon.com/images/I/31lWUHDG7uL._SX282_BO1,204,203,200_.jpg"
-                alt="1984 Book Cover">
-        </div>
-        <div class="col-lg-8">
-            <h3 class="card-title">1984</h3>
-            <p>by <u>George Orwell</u></p>
-            <h4>$10.99</h4>
-            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-            4.0 stars
-            <p><br /></p>
-            <p><i>Amount In Stock: </i> 14, <i>Author: </i> George Orwell <i>Publisher: </i> Harvill Secker <i>Date
-                    Published: </i> June 8, 1949</p>
-        </div>
-
+        <h1 style="text-align: center;">Add New Book</h1>
+        <h2>Input Following Book Information</h2><br>
         <div>
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-danger">Manage Amount in Stock</button>
-                <button type="button" class="btn btn-danger">Manage Author</button>
-                <button type="button" class="btn btn-danger">Manage Publisher</button>
-                <button type="button" class="btn btn-danger">Manage Data Published</button>
-                <button type="button" class="btn btn-danger">Manage Book Cover</button>
+            <div class="input-group">
+                <input type="text" class="form-control" size="50" placeholder="Title" required>
+                <input type="text" class="form-control" size="50" placeholder="Author" required>
+                <input type="text" class="form-control" size="50" placeholder="Image Url" required>
+                <input type="number" class="form-control" size="50" placeholder="Price" required>
+                <input type="number" class="form-control" size="50" placeholder="Rating" required>
+                <input type="text" class="form-control" size="250" placeholder="Description" required>
+                <input type="text" class="form-control" size="250" placeholder="Genre" required>
+                <input type="number" class="form-control" size="50" placeholder="ISBN" required>
             </div>
-
-            <hr>
-
         </div>
-
-        <br>
-
-        <div class="col-lg-4">
-            <img class="card-img-top img-fluid"
-                src="https://images-na.ssl-images-amazon.com/images/I/71uCA9MpXUL._SL1183_.jpg"
-                alt="Huckleberry Finn Book Cover">>
-        </div>
-        <div class="col-lg-8">
-            <h3 class="card-title">Huckleberry Finn</h3>
-            <p>by <u>Mark Twain</u></p>
-            <h4>$10.99</h4>
-            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-            4.0 stars
-            <p><br /></p>
-            <p><i>Amount In Stock: </i> 5, <i>Author: </i> Mark Twain <i>Publisher: </i> Chatto and Windus <i>Date
-                    Published: </i> 1949</p>
-        </div>
-
-        <div>
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-danger">Manage Amount in Stock</button>
-                <button type="button" class="btn btn-danger">Manage Author</button>
-                <button type="button" class="btn btn-danger">Manage Publisher</button>
-                <button type="button" class="btn btn-danger">Manage Data Published</button>
-                <button type="button" class="btn btn-danger">Manage Book Cover</button>
-            </div>
-            <hr>
-        </div>
-
-        <br>
-
-        <div class="col-lg-4">
-            <img class="card-img-top img-fluid"
-                src="https://images-na.ssl-images-amazon.com/images/I/41iers%2BHLSL._SX326_BO1,204,203,200_.jpg"
-                alt="The Great Gatsby Book Cover">>
-        </div>
-        <div class="col-lg-8">
-            <h3 class="card-title">The Great Gatsby</h3>
-            <p>by <u>F. Scott Fitzgerald</u></p>
-            <h4>$10.99</h4>
-            <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-            4.0 stars
-            <p><br /></p>
-            <p><i>Amount In Stock: </i> 27, <i>Author: </i> F. Scott Fitzgerald <i>Publisher: </i> Chatto and Windus <i>Date
-                Published: </i> April 10, 1925</p>
-        </div>
-
-        <div>
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-danger">Manage Amount in Stock</button>
-                <button type="button" class="btn btn-danger">Manage Author</button>
-                <button type="button" class="btn btn-danger">Manage Publisher</button>
-                <button type="button" class="btn btn-danger">Manage Data Published</button>
-                <button type="button" class="btn btn-danger">Manage Book Cover</button>
-            </div>
-            <hr>
-        </div>
-
-        <br>
-
-        <h2>Additional Actions</h2>
 
         <div class="input-group-btn">
             <button type="button" class="btn btn-danger">Add New Book</button>
-            <button type="button" class="btn btn-danger">Delete Existing Book</button>
         </div>
+    </div>
+
 </body>
 
 </html>
