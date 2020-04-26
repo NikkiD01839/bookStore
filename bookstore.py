@@ -351,9 +351,19 @@ def addToCart(title):
     return render_template("bookViewBook.html", data=data)
 
 # view cart
-@app.route("/cart/<title>", methods=["GET", "POST"])
-def cart(title):
-    return render_template("viewCart.html",data=data)
+@app.route("/cart", methods=["GET", "POST"])
+def cart():
+    email = session['USER']
+    userId = db.execute("SELECT id FROM users WHERE email=:email", {
+        "email": email}).fetchone()
+    bookId = db.execute("SELECT bookId FROM cart WHERE userId=:userId", {
+                      "userId": userId[0]}).fetchall()
+    data = []
+    for x in bookId:
+        data.append(db.execute("SELECT title,price,pic_location FROM books WHERE id=:bookId", {
+                      "bookId": x[0]}).fetchall())
+                      
+    return render_template("viewCart.html", data=data)
 
 
 if __name__ == "__main__":
