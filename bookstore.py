@@ -335,10 +335,25 @@ def addBook():
 def manageBooks():
     return render_template("manageBooks.html")
 
+# view add to cart
+@app.route("/addToCart/<title>", methods=["GET", "POST"])
+def addToCart(title):
+    email = session['USER']
+    userId = db.execute("SELECT id FROM users WHERE email=:email", {
+        "email": email}).fetchone()
+    bookId = db.execute("SELECT id FROM books WHERE title=:title", {
+        "title": title}).fetchone()
+    data = db.execute("SELECT title,author,pic_location,price,rating,synopsis,genre,ISBN FROM books WHERE title=:title", {
+                      "title": title}).fetchall()
+    db.execute("INSERT INTO cart (userId, bookId) VALUES (:userId, :bookId)", {"userId": userId[0], "bookId": bookId[0]})
+    db.commit()
+    flash("Book added to Cart", "success")
+    return render_template("bookViewBook.html", data=data)
+
 # view cart
-@app.route("/cart", methods=["GET", "POST"])
-def cart():
-    return render_template("viewCart.html")
+@app.route("/cart/<title>", methods=["GET", "POST"])
+def cart(title):
+    return render_template("viewCart.html",data=data)
 
 
 if __name__ == "__main__":
