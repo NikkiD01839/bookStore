@@ -149,7 +149,7 @@ VALUES("Insurgent", "Veronica Roth", 12.99, 4.5, "Science Fiction", 978-15941385
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Jurassic Park", "Michael Crichton", 17.98, 4.7, "Science Fiction", 978-0345538987,
 "Newly cloned dinosaurs now roam around Jurassic Park! People from around the world come to see them until something goes wrong", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/jurassicpark.jpg");
-
+ 
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Horton Hears a Who!", "Dr. Seuss", 9.99, 5, "Childrens", 978-0394800783,
 "Horton, the lovable elephant, tries to protect tiny creatures on a speck of dust.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/Horton.jpg");
