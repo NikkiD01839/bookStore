@@ -30,17 +30,14 @@ create table paymentCard(
     userId int NOT NULL,
     FOREIGN KEY (userId) REFERENCES users(id)
 );
-create table books(
-	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-    title varchar(255) NOT NULL,
-    author varchar(255) NOT NULL,
-    price double NOT NULL,
-    rating double NOT NULL,
-    genre varchar(255) NOT NULL,
-    ISBN varchar(255) NOT NULL,
-    synopsis varchar(8000),
-    pic_location varchar(255)
+
+create table promotions (
+	promo_code varchar(50) PRIMARY KEY NOT NULL,
+    discount double NOT NULL
 );
+
+INSERT INTO promotions (promo_code, discount)
+VALUES ("123CODE", 5);
 
 create table cart(
 	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
@@ -50,22 +47,46 @@ create table cart(
     FOREIGN KEY (bookId) REFERENCES books(id)
 );
 
+create table books(
+	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+    title varchar(255) NOT NULL,
+    author varchar(255) NOT NULL,
+    price double NOT NULL,
+    rating double NOT NULL,
+    genre varchar(255) NOT NULL,
+    ISBN varchar(255) NOT NULL,
+    synopsis varchar(8000),
+    pic_location varchar(255),
+    
+    edition varchar(255),
+    publisher varchar(255),
+    pubYear int,
+    salePrice double,
+    quantity int
+);
 
-INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location, edition, publisher, pubYear, salePrice, quantity)
 VALUES ("1984", "George Orwell", 13.99, 5, "Dystopian Political Fiction", 978-0452262935, 
-"A story about a dystopian future where a totalitarian super-state watches your every move.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/1984.jpg");
+"A story about a dystopian future where a totalitarian super-state watches your every move.", 
+"https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/1984.jpg", "5th", "my pub", 1999, 12.99, 100);
 
-INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location,edition, publisher, pubYear, salePrice, quantity)
 VALUES("Animal Farm", "George Orwell", 9.99, 5, "Animal Fable/Political Satire", 978-0151002177,
-"A story about an animal revolution and how some animals are more equal than others.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/animalfarm.jpg");
+"A story about an animal revolution and how some animals are more equal than others.", 
+"https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/animalfarm.jpg","5th", "my pub", 1999, 12.99, 100);
 
-INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location,edition, publisher, pubYear, salePrice, quantity)
 VALUES("Brave New World", "Aldous Huxley", 17.99, 4, "Science/Dystopian Fiction", 978-0062696120, 
-"A story about what life would be like if it were pain-free, and thus, meaningless.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/bravenewworld.jpg");
+"A story about what life would be like if it were pain-free, and thus, meaningless.", 
+"https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/bravenewworld.jpg","5th", "my pub", 1999, 12.99, 100);
 
-INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location,edition, publisher, pubYear, salePrice, quantity)
 VALUES("Catch-22", "Joseph Heller", 12.99, 4, "Satire", 978-3596125722, 
-"A story about the paradoxical reality of war.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/catch22.jpg");
+"A story about the paradoxical reality of war.", 
+"https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/catch22.jpg","5th", "my pub", 1999, 12.99, 100);
+
+
+-- to change
 
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Fahrenheit 451", "Ray Bradbury", 21.99, 4.5, "Dystopian", 978-1451673265,
@@ -149,7 +170,7 @@ VALUES("Insurgent", "Veronica Roth", 12.99, 4.5, "Science Fiction", 978-15941385
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Jurassic Park", "Michael Crichton", 17.98, 4.7, "Science Fiction", 978-0345538987,
 "Newly cloned dinosaurs now roam around Jurassic Park! People from around the world come to see them until something goes wrong", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/jurassicpark.jpg");
- 
+
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Horton Hears a Who!", "Dr. Seuss", 9.99, 5, "Childrens", 978-0394800783,
 "Horton, the lovable elephant, tries to protect tiny creatures on a speck of dust.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/Horton.jpg");
