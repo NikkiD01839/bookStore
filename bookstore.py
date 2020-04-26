@@ -345,7 +345,8 @@ def addToCart(title):
         "title": title}).fetchone()
     data = db.execute("SELECT title,author,pic_location,price,rating,synopsis,genre,ISBN FROM books WHERE title=:title", {
                       "title": title}).fetchall()
-    db.execute("INSERT INTO cart (userId, bookId) VALUES (:userId, :bookId)", {"userId": userId[0], "bookId": bookId[0]})
+    db.execute("INSERT INTO cart (userId, bookId) VALUES (:userId, :bookId)", {
+               "userId": userId[0], "bookId": bookId[0]})
     db.commit()
     flash("Book added to Cart", "success")
     return render_template("bookViewBook.html", data=data)
@@ -357,29 +358,32 @@ def cart():
     userId = db.execute("SELECT id FROM users WHERE email=:email", {
         "email": email}).fetchone()
     bookId = db.execute("SELECT bookId FROM cart WHERE userId=:userId", {
-                      "userId": userId[0]}).fetchall()
+        "userId": userId[0]}).fetchall()
     data = []
     for x in bookId:
         data.append(db.execute("SELECT title,price,pic_location FROM books WHERE id=:bookId", {
-                      "bookId": x[0]}).fetchall())
-                      
+            "bookId": x[0]}).fetchall())
+
     return render_template("viewCart.html", data=data)
 
-# view remove from cart 
+# view remove from cart
 @app.route("/removeFromCart/<title>", methods=["GET", "POST"])
 def removeFromCart(title):
-    # email = session['USER']
-    # userId = db.execute("SELECT id FROM users WHERE email=:email", {
-    #     "email": email}).fetchone()
-    # bookId = db.execute("SELECT id FROM books WHERE title=:title", {
-    #     "title": title}).fetchone()
-    # data = db.execute("SELECT title,author,pic_location,price,rating,synopsis,genre,ISBN FROM books WHERE title=:title", {
-    #                   "title": title}).fetchall()
-    # db.execute("INSERT INTO cart (userId, bookId) VALUES (:userId, :bookId)", {"userId": userId[0], "bookId": bookId[0]})
-    # db.commit()
-    # flash("Book added to Cart", "success")
-    # return render_template("viewCart.html", data=data)
-    pass
+    email = session['USER']
+    userId = db.execute("SELECT id FROM users WHERE email=:email", {
+        "email": email}).fetchone()
+    bookId = db.execute("SELECT id FROM books WHERE title=:title", {
+        "title": title}).fetchone()
+    db.execute("DELETE FROM cart WHERE userId=:userId AND bookId=:bookId LIMIT 1", {
+               "userId": userId[0], "bookId": bookId[0]})
+    db.commit()
+    # data = []
+    # for x in bookId:
+    #     data.append(db.execute("SELECT title,price,pic_location FROM books WHERE id=:bookId", {
+    #         "bookId": x}).fetchall())
+    flash("Book Removed from Cart", "success")
+    return redirect(url_for('cart'))
+
 
 if __name__ == "__main__":
     app.secret_key = "key"
