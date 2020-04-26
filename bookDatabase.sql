@@ -30,7 +30,6 @@ create table paymentCard(
     userId int NOT NULL,
     FOREIGN KEY (userId) REFERENCES users(id)
 );
-
 create table books(
 	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
     title varchar(255) NOT NULL,
@@ -38,29 +37,29 @@ create table books(
     price double NOT NULL,
     rating double NOT NULL,
     genre varchar(255) NOT NULL,
-    ISBN int NOT NULL,
+    ISBN varchar(255) NOT NULL,
     synopsis varchar(8000),
     pic_location varchar(255)
 );
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES ("1984", "George Orwell", 13.99, 5, "Dystopian Political Fiction", 978-0452262935, 
 "A story about a dystopian future where a totalitarian super-state watches your every move.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/1984.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Animal Farm", "George Orwell", 9.99, 5, "Animal Fable/Political Satire", 978-0151002177,
 "A story about an animal revolution and how some animals are more equal than others.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/animalfarm.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
-VALUES("Brave New World", "Aldous Huxley", 17.99, 4 stars, "Science/Dystopian Fiction", 978-0062696120, 
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Brave New World", "Aldous Huxley", 17.99, 4, "Science/Dystopian Fiction", 978-0062696120, 
 "A story about what life would be like if it were pain-free, and thus, meaningless.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/bravenewworld.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Catch-22", "Joseph Heller", 12.99, 4, "Satire", 978-3596125722, 
 "A story about the paradoxical reality of war.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/catch22.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
-VALUES("Fahrenheit 451", "Ray Bradbury", 21.99, 4.5, "Dystopian", 978-1,451673265,
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+VALUES("Fahrenheit 451", "Ray Bradbury", 21.99, 4.5, "Dystopian", 978-1451673265,
 "A story about burning books.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/fahrenheit451.jpg");
 
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location) 
@@ -107,46 +106,46 @@ of Napoleonic rule. He soon joins La Justicia, a secret underground resistance m
 devoted to helping the powerless and the poor. Between the New World and the Old, the
 persona of Zorro is formed, a great hero is born, and the legend begins. After many
 adventures -- duels at dawn, fierce battles with pirates at sea, and impossible rescues
--- Diego de la Vega, a.k.a. Zorro, returns to America to reclaim the hacienda on which 
+Diego de la Vega, a.k.a. Zorro, returns to America to reclaim the hacienda on which 
 he was raised and to seek justice for all who cannot fight for it themselves.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/zorro.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Pride and Prejudice", "Jane Austen", 7.99, 5, "Romantic Novel", 978-0486284736,
 "Elizabeth Bennett is quick to dislike Mr.Darcy who has an acerbic wit. The two butt heads and eventually fall in love.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/prideprejudice.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("The Odyssey", "Homer", 10.00, 4.3, "Epic Poetry", 978-0140268867,
 "Odysseus endures many trials on his journey back to Ithaca.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/lookingglass.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Pygmalion", "George Bernard Shaw", 4.99, 4.5, "Romantic Comedy", 978-0486282220,
 "Eliza Doolittle learns how to be a cultured gentlewoman.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/pygmalion.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Twilight", "Stephanie Meyer", 1.99, 4, "Young Adult Fiction", 978-0316015844,
 "Bella Swan is your average girl who doesn't know she's actually beautiful. Edward Cullen is an immortal being who sparkles in the sunlight, and this makes him a monster. Romance ensues.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/twilight.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Through the Looking Glass", "Lewis Carroll", 8.50, 5, "Childrens", 978-1450593267,
 "Alice has another fantastical adventure.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/lookingglass.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("The Hunger Games", "Suzanne Collins", 12.99, 4.7, "Adventure", 978-0439023481,
 "12 districts are forced to send young adults to compete in a survival game. The one who wins gets fame and glory. Those who don’t die.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/hungergames.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Insurgent", "Veronica Roth", 12.99, 4.5, "Science Fiction", 978-1594138539,
 "Sequel to Divergent, it continues the story of Tris Prior, who must now save those that she loves as war has broken out between the factions.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/insurgent.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Jurassic Park", "Michael Crichton", 17.98, 4.7, "Science Fiction", 978-0345538987,
 "Newly cloned dinosaurs now roam around Jurassic Park! People from around the world come to see them until something goes wrong", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/jurassicpark.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("Horton Hears a Who!", "Dr. Seuss", 9.99, 5, "Childrens", 978-0394800783,
 "Horton, the lovable elephant, tries to protect tiny creatures on a speck of dust.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/Horton.jpg");
 
-INSERT INTO book (title, author, price, rating, genre, ISBN, synopsis, pic_location)
+INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES("The Lorax", "Dr. Seuss", 11.89, 5, "Childrens", 978-0394823379,
 "I am the Lorax. I speak for the trees.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/thelorax.jpg");
 
