@@ -50,7 +50,7 @@ def register():
         confirm = request.form.get("confirm")
         secure_password = sha256_crypt.encrypt(str(password))
         ccnum = request.form.get("ccnum")
-        lastFour = ccnum[-4]
+        lastFour = ccnum[-4:]
         secure_ccnum = sha256_crypt.encrypt(str(ccnum))
         expdate = request.form.get("expdate")
         ccv = request.form.get("ccv")
@@ -82,7 +82,7 @@ def register():
                 name_on_card = fname + " " + lname
 
                 db.execute("INSERT INTO paymentcard (cardNumber, type, exp_date, bill_add, name_on_card, ccv, userId, lastFour) VALUES (:ccnum, :cctype, :expdate, :billadd, :name_on_card, :ccv, :userId, :lastFour)", {
-                           "ccnum": secure_ccnum, "cctype": cctype, "expdate": expdate, "billadd": billadd, "name_on_card": name_on_card, "ccv": ccv, "userId": userId[0], "lsatFour": lastFour)}
+                           "ccnum": secure_ccnum, "cctype": cctype, "expdate": expdate, "billadd": billadd, "name_on_card": name_on_card, "ccv": ccv, "userId": userId[0], "lastFour": lastFour})
                 db.commit()
 
             email = request.form['email']
@@ -235,70 +235,94 @@ def account():
                          "userId": userId[0]}).fetchone()
 
     if address is None:
+        stuffExists = False
         data = db.execute(
             "SELECT * FROM users WHERE email=:email", {"email": email}).fetchall()
     else:
+        stuffExists = True
         data = db.execute("SELECT * FROM users,paymentcard WHERE users.id=paymentcard.userid and users.email=:email", {
             "email": email}).fetchall()
 
     if request.method == "POST":
-        email = session["USER"]
 
-        if request.form.get("fname"):
-            fname = request.form.get("fname")
-            db.execute("UPDATE users SET first_name=:fname WHERE email=:email", {
-                       "fname": fname, "email": email})
-            db.commit()
-            flash("First name updated", "success")
-            return redirect(url_for('account'))
-        elif request.form.get("lname"):
-            lname = request.form.get("lname")
-            db.execute("UPDATE users SET last_name=:lname WHERE email=:email", {
-                       "lname": lname, "email": email})
-            db.commit()
-            flash("Last name updated", "success")
-            return redirect(url_for('account'))
-        elif request.form.get("address"):
-            address = request.form.get("address")
-            db.execute("UPDATE paymentcard SET bill_add=:address WHERE userId=:userId", {
-                       "address": address, "userId": userId[0]})
-            db.commit()
-            flash("Address updated", "success")
-            return redirect(url_for('account'))
-        elif request.form.get("cardType"):
-            cardType = request.form.get("cardType")
-            db.execute("UPDATE paymentcard SET type=:cardType WHERE userId=:userId", {
-                       "cardType": cardType, "userId": userId[0]})
-            db.commit()
-            flash("Card type updated", "success")
-            return redirect(url_for('account'))
-        elif request.form.get("ccnum"):
+        if stuffExists:
+            if request.form.get("fname"):
+                fname = request.form.get("fname")
+                db.execute("UPDATE users SET first_name=:fname WHERE email=:email", {
+                    "fname": fname, "email": email})
+                db.commit()
+                flash("First name updated", "success")
+                return redirect(url_for('account'))
+            elif request.form.get("lname"):
+                lname = request.form.get("lname")
+                db.execute("UPDATE users SET last_name=:lname WHERE email=:email", {
+                    "lname": lname, "email": email})
+                db.commit()
+                flash("Last name updated", "success")
+                return redirect(url_for('account'))
+            elif request.form.get("address"):
+                address = request.form.get("address")
+                db.execute("UPDATE paymentcard SET bill_add=:address WHERE userId=:userId", {
+                    "address": address, "userId": userId[0]})
+                db.commit()
+                flash("Address updated", "success")
+                return redirect(url_for('account'))
+            elif request.form.get("name_on_card"):
+                name_on_card = request.form.get("name_on_card")
+                db.execute("UPDATE paymentcard SET name_on_card=:name_on_card WHERE userId=:userId", {
+                    "name_on_card": name_on_card, "userId": userId[0]})
+                db.commit()
+                flash("Name on Card updated", "success")
+                return redirect(url_for('account'))
+            elif request.form.get("cardType"):
+                cardType = request.form.get("cardType")
+                db.execute("UPDATE paymentcard SET type=:cardType WHERE userId=:userId", {
+                    "cardType": cardType, "userId": userId[0]})
+                db.commit()
+                flash("Card type updated", "success")
+                return redirect(url_for('account'))
+            elif request.form.get("ccnum"):
+                ccnum = request.form.get("ccnum")
+                lastFour = ccnum[-4:]
+                secure_ccnum = sha256_crypt.encrypt(str(ccnum))
+                db.execute("UPDATE paymentcard SET cardNumber=:ccnum WHERE userId=:userId", {
+                    "ccnum": secure_ccnum, "userId": userId[0]})
+                db.execute("UPDATE paymentcard SET lastFour=:lastFour WHERE userId=:userId", {
+                    "lastFour": lastFour, "userId": userId[0]})
+                db.commit()
+                flash("Card number updated", "success")
+                return redirect(url_for('account'))
+            elif request.form.get("ccv"):
+                ccv = request.form.get("ccv")
+                db.execute("UPDATE paymentcard SET ccv=:ccv WHERE userId=:userId", {
+                    "ccv": ccv, "userId": userId[0]})
+                db.commit()
+                flash("CCV updated", "success")
+                return redirect(url_for('account'))
+            elif request.form.get("expdate"):
+                expdate = request.form.get("expdate")
+                db.execute("UPDATE paymentcard SET exp_date=:expdate WHERE userId=:userId", {
+                    "expdate": expdate, "userId": userId[0]})
+                db.commit()
+                flash("Expiration Date updated", "success")
+                return redirect(url_for('account'))
+        else:
+            billadd = request.form.get("address")
             ccnum = request.form.get("ccnum")
-            lastFour = ccnum[-4]
+            lastFour = ccnum[-4:]
             secure_ccnum = sha256_crypt.encrypt(str(ccnum))
-            db.execute("UPDATE paymentcard SET cardNumber=:ccnum WHERE userId=:userId", {
-                       "ccnum": secure_ccnum, "userId": userId[0]})
-            db.execute("UPDATE paymentcard SET lastFour=:lastFour WHERE userId=:userId", {
-                "lastFour": lastFour, "userId": userId[0]})
-            db.commit()
-            flash("Card number updated", "success")
-            return redirect(url_for('account'))
-        elif request.form.get("ccv"):
-            ccv = request.form.get("ccv")
-            db.execute("UPDATE paymentcard SET ccv=:ccv WHERE userId=:userId", {
-                       "ccv": ccv, "userId": userId[0]})
-            db.commit()
-            flash("CCV updated", "success")
-            return redirect(url_for('account'))
-        elif request.form.get("expdate"):
+            cctype = request.form.get("cardType")
             expdate = request.form.get("expdate")
-            db.execute("UPDATE paymentcard SET exp_date=:expdate WHERE userId=:userId", {
-                       "expdate": expdate, "userId": userId[0]})
+            name_on_card = request.form.get("name_on_card")
+            ccv = request.form.get("ccv")
+
+            db.execute("INSERT INTO paymentcard (cardNumber, type, exp_date, bill_add, name_on_card, ccv, userId, lastFour) VALUES (:ccnum, :cctype, :expdate, :billadd, :name_on_card, :ccv, :userId, :lastFour)", {
+                "ccnum": secure_ccnum, "cctype": cctype, "expdate": expdate, "billadd": billadd, "name_on_card": name_on_card, "ccv": ccv, "userId": userId[0], "lastFour": lastFour})
             db.commit()
-            flash("Expiration Date updated", "success")
+            flash("Information Updated", "success")
             return redirect(url_for('account'))
 
-    return render_template("bookViewAccount.html", data=data)
+    return render_template("bookViewAccount.html", data=data, stuffExists=stuffExists)
 
 # viewBooks
 @app.route("/viewBooks")
@@ -377,7 +401,7 @@ def cart():
         data.append(db.execute("SELECT title,price,pic_location FROM books WHERE id=:bookId", {
             "bookId": x[0]}).fetchall())
         total += data[i][0][1]
-        i+=1
+        i += 1
     print(total)
     return render_template("viewCart.html", data=data, total=total)
 
@@ -445,9 +469,9 @@ def paymentInfo():
             db.execute("UPDATE paymentcard SET ccv=:ccv WHERE userId=:userId", {
                        "ccv": ccv, "userId": userId[0]})
             db.commit()
-        
 
-    return render_template("bookOrderPaymentInfo.html", data=data)
+    return render_template("bookOrderPaymentInfo.html", data=data, stuffExists=stuffExists)
+
 
 if __name__ == "__main__":
     app.secret_key = "key"

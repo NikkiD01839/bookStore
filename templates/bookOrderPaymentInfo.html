@@ -135,7 +135,7 @@
         {% for item in data %}
         <form class="form-inline">
             <div class="input-group">
-                <input type="text" value="{{item[8]}}" name="ccnum" class="form-control" size="50"
+                <input type="text" value="******{{item[15]}}" name="ccnum" class="form-control" size="50"
                     placeholder="Enter Your Credit Card Number" pattern="[0-9]{13,19}">
                 <input type="text" value="{{item[10]}}" name="expdate" class="form-control" size="50"
                     placeholder="Enter the Expiration Date(Format: MM/YYYY)" pattern="(0[1-9]|1[0-2])\/[0-9]{4}">
@@ -148,6 +148,13 @@
                 <input type="text" value="{{item[]}}" name="shipadd" class="form-control" size="50"
                     placeholder="Enter the Shipping Address">
             </div>
+            <br>
+            <!-- Promotion Code if Any:
+            <div class="input-group">
+                <input type="text" name="promo_code" class="form-control" size="50"
+                    placeholder="Enter Your Promo Code">
+            </div> -->
+
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-danger">Purchase Now</button>
             </div>

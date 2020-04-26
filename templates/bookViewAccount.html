@@ -148,6 +148,7 @@
             </div>
           </form>
         </p>
+        {% if stuffExists %}
         <p>
           <form class="form-inline" action="" method="post" .>
             <div class="col-sm-10">
@@ -158,8 +159,16 @@
             </div>
           </form>
         </p>
-
-
+        <p>
+          <form class="form-inline" action="" method="post" .>
+            <div class="col-sm-10">
+              <input type="text" name="name_on_card" value="{{item[12]}}" />
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-default pull-right" type="submit">Name on Card</button>
+            </div>
+          </form>
+        </p>
         <p>
           <form class="form-inline" action="" method="post" .>
             <div class="col-sm-10">
@@ -173,7 +182,7 @@
         <p>
           <form class="form-inline" action="" method="post" .>
             <div class="col-sm-10">
-              <input type="text" name="ccnum" value="{{item[8]}}" />
+              <input type="text" name="ccnum" value="*******{{item[15]}}" />
             </div>
             <div class="col-sm-2">
               <button class="btn btn-default pull-right" type="submit">Change Number</button>
@@ -200,38 +209,27 @@
             </div>
           </form>
         </p>
-        {% endfor %}
+        {% else  %}
+       
+        <form class="form-inline" action="/user" method="POST">
+          <div class="input-group">
+            <input type="text" name="name_on_card" class="form-control" size="50" placeholder="Enter the Name on Card">
+            <input type="text" name="ccnum" class="form-control" size="50" placeholder="Enter Your Credit Card Number"
+              pattern="[0-9]{13,19}">
+            <input type="text" name="expdate" class="form-control" size="50"
+              placeholder="Enter the Expiration Date(Format: MM/YYYY)" pattern="(0[1-9]|1[0-2])\/[0-9]{4}">
+            <input type="text" name="ccv" class="form-control" size="50" placeholder="Enter the Security Code"
+              pattern="[0-9]{3}">
+            <input type="text" name="cardType" class="form-control" size="50" placeholder="Enter the Type of Card">
+            <input type="text" name="address" class="form-control" size="50" placeholder="Enter the Billing Address">
+          </div>
+          <div class="input-group-btn">
+            <button type="submit" class="btn btn-danger">Change Payment Information</button>
+          </div>
+        </form>
+        {% endif %}
 
-        <!-- <p>
-          <form class="form-inline" action="" method="post" .>
-            <div class="col-sm-10">
-              <input type="text" name="cardType" value="VISA" />
-            </div>
-            <div class="col-sm-2">
-              <button class="btn btn-default pull-right" type="submit">Change Card Type</button>
-            </div>
-          </form>
-          <p>
-            <form class="form-inline" action="" method="post" .>
-              <div class="col-sm-10">
-                <input type="text" name="ccnum" value="1234567887654321" />
-              </div>
-              <div class="col-sm-2">
-                <button class="btn btn-default pull-right" type="submit">Change Number</button>
-              </div>
-            </form>
-            <p>
-              <form class="form-inline" action="" method="post" .>
-                <div class="col-sm-10">
-                  <input type="text" name="ccv" value="123" />
-                </div>
-                <div class="col-sm-2">
-                  <button class="btn btn-default pull-right" type="submit">Change CCV</button>
-                </div>
-              </form>
-            </p>
-          </p>
-        </p> -->
+        {% endfor %}
 
 
       </div>
