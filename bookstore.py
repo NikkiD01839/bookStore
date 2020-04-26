@@ -365,7 +365,7 @@ def cart():
                       
     return render_template("viewCart.html", data=data)
 
-# view remove from car
+# view remove from cart
 @app.route("/removeFromCart/<title>", methods=["GET", "POST"])
 def removeFromCart(title):
     # email = session['USER']
