@@ -11,9 +11,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 </head>
-
 <body>
-
   <style>
     .jumbotron {
       background-color: #f4511e;
@@ -65,6 +63,8 @@
 
     .navbar {
       font-family: Montserrat, sans-serif;
+      text-align: center;
+  
     }
 
     footer .glyphicon {
@@ -73,7 +73,7 @@
       color: #f4511e;
     }
   </style>
-
+  
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
@@ -85,18 +85,18 @@
         <a class="navbar-brand" href="/">Bookstore Website</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
-        {% if session.log %}
-        <li><a href="/logout">LOG OUT</a></li>
-        <li><a href="/user">VIEW ACCOUNT</a></li>
-        <li><a href="/cart">VIEW CART</a></li>
-        {% else  %}
-        <li><a href="/login">LOGIN/REGISTER</a></li>
-        {% endif %}
+        <ul class="nav navbar-nav navbar-right">
+          {% if session.log %}
+          <li><a href="/logout">LOG OUT</a></li>
+          <li><a href="/user">VIEW ACCOUNT</a></li>
+          <li><a href="/cart">VIEW CART</a></li>
+          {% else  %}
+          <li><a href="/login">LOGIN/REGISTER</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>
   </nav>
-
 
   <div class="jumbotron">
     <h1>VIEW CART</h1>
@@ -123,10 +123,13 @@
       </div>
 
     </div>
+    </div>
 
     {% endfor %}
 
     
+
+    </div>
     <h3>Promo Code: </h3>
     <input type="text" id="promo" name="promo" value="PROMOCODE">
     <input type="button" id="promoenter" name="promoenter" value="enter">
