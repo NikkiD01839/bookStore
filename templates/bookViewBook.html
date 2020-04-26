@@ -130,9 +130,13 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#about">LOGIN/REGISTER</a></li>
-                    <li><a href="#user">VIEW ACCOUNT</a></li>
-                    <li><a href="#services">VIEW CART</a></li>
+                    {% if session.log %}
+                    <li><a href="/logout">LOG OUT</a></li>
+                    <li><a href="/user">VIEW ACCOUNT</a></li>
+                    <li><a href="/cart">VIEW CART</a></li>
+                    {% else  %}
+                    <li><a href="/login">LOGIN/REGISTER</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -152,33 +156,27 @@
         </form>
     </div>
 
+    {% for item in data %}
+
     <div class="col-lg-4">
-        <img class="card-img-top img-fluid" src="twilight.jpg" alt="Twilight Book Cover">
+        <img class="card-img-top img-fluid" src={{item[2]}} alt={{item[0]}}>
     </div>
     <div class="col-lg-8">
-        <h3 class="card-title">Twilight </h3>
-        <p>by <u>Stephanie Meyer</u></p>
-        <h4>$10.99</h4>
+        <h3 class="card-title">
+            <p><strong>{{item[0]}}</strong></p>
+        </h3>
+        <p>by <u>{{item[1]}}</u></p>
+        <h4>{{item[3]}}</h4>
         <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-        4.0 stars
+        {{item[4]}}
         <p><br /></p>
         <div><button type="button" class="button">Add To Cart</button></div>
         <div>
             <p><br /></p>
-            <p>Bella Swan is just a clumsy gal who has no personality.
-                She is not like other girls, and is gorgeous but doesn't even know it!
-                Then she meets Edward, who sparkles in the sunlight and that makes him a monster.
-                What will happen? Stalking is on the table, but definitely no premarital relations.</p>
+            <p>item{{[5]}}</p>
         </div>
+        {{item[6]}}
     </div>
-
-    {% for item in data %}
-
-    <img src={{item[2]}} alt={{item[0]}}>
-    <p><strong>{{item[0]}}</strong></p>
-    <p>{{item[1]}}</p>
-
-    <hr>
 
     {% endfor %}
 
@@ -192,5 +190,3 @@
                     title="Visit w3schools">www.w3schools.com</a></p>
         </footer>
     </div>
-
-    
