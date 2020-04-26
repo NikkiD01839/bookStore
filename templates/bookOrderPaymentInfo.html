@@ -131,21 +131,49 @@
 
         <h3>Fill in Card Details:</h3>
 
+        {% if stuffExists %}
         {% for item in data %}
         <form class="form-inline">
             <div class="input-group">
-                <input type="text" value="{{item[8]}}" name="ccnum" class="form-control" size="50" placeholder="Enter Your Credit Card Number" pattern="[0-9]{13,19}">
-                <input type="text" value="{{item[10]}}" name="expdate" class="form-control" size="50" placeholder="Enter the Expiration Date(Format: MM/YYYY)" pattern="(0[1-9]|1[0-2])\/[0-9]{4}">
-                <input type="text" value="{{item[13]}}" name="ccv" class="form-control" size="50" placeholder="Enter the Security Code" pattern="[0-9]{3}">
-                <input type="text" value="{{item[9]}}" name="cardType" class="form-control" size="50" placeholder="Enter the Type of Card">
-                <input type="text" value="{{item[11]}}" name="address" class="form-control" size="50" placeholder="Enter the Billing Address">
-                <input type="text" value="{{item[]}}" name="shipadd" class="form-control" size="50" placeholder="Enter the Shipping Address">
+                <input type="text" value="{{item[8]}}" name="ccnum" class="form-control" size="50"
+                    placeholder="Enter Your Credit Card Number" pattern="[0-9]{13,19}">
+                <input type="text" value="{{item[10]}}" name="expdate" class="form-control" size="50"
+                    placeholder="Enter the Expiration Date(Format: MM/YYYY)" pattern="(0[1-9]|1[0-2])\/[0-9]{4}">
+                <input type="text" value="{{item[13]}}" name="ccv" class="form-control" size="50"
+                    placeholder="Enter the Security Code" pattern="[0-9]{3}">
+                <input type="text" value="{{item[9]}}" name="cardType" class="form-control" size="50"
+                    placeholder="Enter the Type of Card">
+                <input type="text" value="{{item[11]}}" name="address" class="form-control" size="50"
+                    placeholder="Enter the Billing Address">
+                <input type="text" value="{{item[]}}" name="shipadd" class="form-control" size="50"
+                    placeholder="Enter the Shipping Address">
             </div>
             <div class="input-group-btn">
                 <button type="submit" class="btn btn-danger">Purchase Now</button>
             </div>
         </form>
         {% endfor %}
+        {% else  %}
+        <form class="form-inline">
+            <div class="input-group">
+                <input type="text" name="ccnum" class="form-control" size="50"
+                    placeholder="Enter Your Credit Card Number" pattern="[0-9]{13,19}">
+                <input type="text" name="expdate" class="form-control" size="50"
+                    placeholder="Enter the Expiration Date(Format: MM/YYYY)" pattern="(0[1-9]|1[0-2])\/[0-9]{4}">
+                <input type="text" name="ccv" class="form-control" size="50"
+                    placeholder="Enter the Security Code" pattern="[0-9]{3}">
+                <input type="text" name="cardType" class="form-control" size="50"
+                    placeholder="Enter the Type of Card">
+                <input type="text" name="address" class="form-control" size="50"
+                    placeholder="Enter the Billing Address">
+                <input type="text" name="shipadd" class="form-control" size="50"
+                    placeholder="Enter the Shipping Address">
+            </div>
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-danger">Purchase Now</button>
+            </div>
+        </form>
+        {% endif %}
 
         <!-- <h3>Fill in Address Details</h3>
 

@@ -28,7 +28,8 @@ create table paymentCard(
     name_on_card varchar(255) NOT NULL,
     ccv varchar(25) NOT NULL,
     userId int NOT NULL,
-    FOREIGN KEY (userId) REFERENCES users(id)
+    FOREIGN KEY (userId) REFERENCES users(id),
+    lastFour varchar(255) NOT NULL
 );
 
 create table promotions (

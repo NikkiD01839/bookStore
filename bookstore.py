@@ -407,7 +407,9 @@ def paymentInfo():
 
     if address is None:
         data = []
+        stuffExists = False
     else:
+        stuffExists = True
         data = db.execute("SELECT * FROM users,paymentcard WHERE users.id=paymentcard.userid and users.email=:email", {
             "email": email}).fetchall()
 
