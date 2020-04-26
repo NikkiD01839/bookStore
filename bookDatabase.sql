@@ -42,6 +42,15 @@ create table books(
     pic_location varchar(255)
 );
 
+create table cart(
+	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+    userId int NOT NULL,
+	FOREIGN KEY (userId) REFERENCES users(id),
+    bookId int NOT NULL,
+    FOREIGN KEY (bookId) REFERENCES books(id)
+);
+
+
 INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location)
 VALUES ("1984", "George Orwell", 13.99, 5, "Dystopian Political Fiction", 978-0452262935, 
 "A story about a dystopian future where a totalitarian super-state watches your every move.", "https://raw.githubusercontent.com/NikkiD01839/bookStore/master/images/1984.jpg");
