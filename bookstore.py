@@ -297,7 +297,7 @@ def viewBooks():
 # book details
 @app.route("/viewBook/<title>", methods=["GET", "POST"])
 def viewBook(title):
-    data = db.execute("SELECT title,author,pic_location FROM books WHERE title=:title", {"title" : title}).fetchall()
+    data = db.execute("SELECT title,author,pic_location,price,rating,synopsis,genre,ISBN FROM books WHERE title=:title", {"title" : title}).fetchall()
     return render_template("bookViewBook.html", data=data)
 
 #add book
@@ -310,10 +310,24 @@ def addBook():
         rating = request.form.get("rating")
         genre = request.form.get("genre")
         isbn = request.form.get("isbn")
+        synopsis = request.form.get("synopsis")
+        pic = request.form.get("pic")
+        edition = request.form.get("edition")
+        publisher = request.form.get("publisher")
+        pubYear = request.form.get("pubYear")
+        sellPrice = request.form.get("sellPrice")
 
-        db.execute("INSERT INTO books (title, author, price, rating, genre, isbn) VALUES (:title, :author, :price, :rating, :genre, :isbn)",
+
+        db.execute("INSERT INTO books (title, author, price, rating, genre,"
+                   " ISBN, synopsis, pic_location, edition,"
+                   " publisher, pubYear, sellPrice) "
+                   "VALUES (:title, :author, :price, :rating, "
+                   ":genre, :isbn, :synopsis, :pic, :edition, :publisher, :pubYear, :sellPrice)",
                    {
-                       "title": title, "author": author, "price": price, "rating": rating, "genre": genre, "isbn": isbn})
+                       "title": title, "author": author, "price": price,
+                       "rating": rating, "genre": genre, "isbn": isbn,
+                       "synopsis": synopsis, "pic": pic, "edition": edition,
+                       "publisher": publisher, "pubYear": pubYear, "sellPrice": sellPrice})
         flash("Book Added", "success")
     return render_template("addBook.html")
 
