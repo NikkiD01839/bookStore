@@ -207,12 +207,11 @@ def change_password():
     passwordData = db.execute("SELECT pass FROM users WHERE email=:email", {
         "email": email}).fetchone()
 
-
     if sha256_crypt.verify(password, passwordData[0]):
         if newpassword == confirmpassword:
             secure_password = sha256_crypt.encrypt(str(newpassword))
             db.execute("UPDATE users SET pass=:password WHERE email=:email", {
-                        "password": secure_password, "email": email})
+                "password": secure_password, "email": email})
             db.commit()
             flash("Your password has been changed.", "success")
             return render_template("bookViewAccount.html")
@@ -228,20 +227,22 @@ def change_password():
 @app.route("/user", methods=["GET", "POST"])
 def account():
     email = session['USER']
-    
+
     userId = db.execute("SELECT id FROM users WHERE email=:email", {
-            "email": email}).fetchone()
-    address = db.execute("SELECT bill_add FROM paymentcard WHERE userId=:userId", {"userId": userId[0]}).fetchone()
+        "email": email}).fetchone()
+    address = db.execute("SELECT bill_add FROM paymentcard WHERE userId=:userId", {
+                         "userId": userId[0]}).fetchone()
 
     if address is None:
-        data = db.execute("SELECT * FROM users WHERE email=:email", {"email": email}).fetchall()
+        data = db.execute(
+            "SELECT * FROM users WHERE email=:email", {"email": email}).fetchall()
     else:
         data = db.execute("SELECT * FROM users,paymentcard WHERE users.id=paymentcard.userid and users.email=:email", {
-        "email": email}).fetchall()
-    
+            "email": email}).fetchall()
+
     if request.method == "POST":
         email = session["USER"]
-        
+
         if request.form.get("fname"):
             fname = request.form.get("fname")
             db.execute("UPDATE users SET first_name=:fname WHERE email=:email", {
@@ -286,21 +287,22 @@ def account():
             flash("CCV updated", "success")
             return redirect(url_for('account'))
 
-    return render_template("bookViewAccount.html",data=data)
+    return render_template("bookViewAccount.html", data=data)
 
 # viewBooks
 @app.route("/viewBooks")
 def viewBooks():
     data = db.execute("SELECT title,author,pic_location FROM books").fetchall()
-    return render_template("bookViewBooks.html",data=data)
+    return render_template("bookViewBooks.html", data=data)
 
 # book details
 @app.route("/viewBook/<title>", methods=["GET", "POST"])
 def viewBook(title):
-    data = db.execute("SELECT title,author,pic_location,price,rating,synopsis,genre,ISBN FROM books WHERE title=:title", {"title" : title}).fetchall()
+    data = db.execute("SELECT title,author,pic_location,price,rating,synopsis,genre,ISBN FROM books WHERE title=:title", {
+                      "title": title}).fetchall()
     return render_template("bookViewBook.html", data=data)
 
-#add book
+# add book
 @app.route("/addBook", methods=["GET", "POST"])
 def addBook():
     if request.method == "POST":
@@ -317,24 +319,26 @@ def addBook():
         pubYear = request.form.get("pubYear")
         sellPrice = request.form.get("sellPrice")
 
-
-        db.execute("INSERT INTO books (title, author, price, rating, genre,"
-                   " ISBN, synopsis, pic_location, edition,"
-                   " publisher, pubYear, sellPrice) "
-                   "VALUES (:title, :author, :price, :rating, "
-                   ":genre, :isbn, :synopsis, :pic, :edition, :publisher, :pubYear, :sellPrice)",
+        db.execute("INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location, edition, publisher, pubYear, salePrice) VALUES (:title, :author, :price, :rating, :genre, :isbn, :synopsis, :pic, :edition, :publisher, :pubYear, :salePrice)",
                    {
                        "title": title, "author": author, "price": price,
                        "rating": rating, "genre": genre, "isbn": isbn,
                        "synopsis": synopsis, "pic": pic, "edition": edition,
-                       "publisher": publisher, "pubYear": pubYear, "sellPrice": sellPrice})
-        flash("Book Added", "success")
-    return render_template("addBook.html")
+                       "publisher": publisher, "pubYear": pubYear, "salePrice": sellPrice})
 
-#manage books
+        db.commit()
+        flash("Book Added", "success")
+    return render_template("manageBooks.html")
+
+# manage books
 @app.route("/manageBooks", methods=["GET", "POST"])
 def manageBooks():
     return render_template("manageBooks.html")
+
+# view cart
+@app.route("/cart", methods=["GET", "POST"])
+def cart():
+    return render_template("viewCart.html")
 
 
 if __name__ == "__main__":
