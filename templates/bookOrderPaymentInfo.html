@@ -70,15 +70,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="navbar-brand" href="/">Bookstore Website</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#services">SERVICES</a></li>
-                    <li><a href="#portfolio">PORTFOLIO</a></li>
-                    <li><a href="#pricing">PRICING</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
+                    {% if session.log %}
+                    <li><a href="/logout">LOG OUT</a></li>
+                    <li><a href="/user">VIEW ACCOUNT</a></li>
+                    <li><a href="/cart">VIEW CART</a></li>
+                    {% else  %}
+                    <li><a href="/login">LOGIN/REGISTER</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -89,7 +91,7 @@
     </div>
 
     <div class="container-fluid bg-grey">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-5">
                 <h2 class="text-center">Choose Payment Option</h2>
                 <p><br /></p>
@@ -124,7 +126,7 @@
             </div>
         </div>
         <hr>
-        <h2 style="text-align: center;">OR</h2>
+        <h2 style="text-align: center;">OR</h2> -->
 
         <h3>Fill in Card Details:</h3>
 
