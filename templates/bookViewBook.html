@@ -126,7 +126,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Bookstore Website</a>
+                <a class="navbar-brand" href="/">Bookstore Website</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
@@ -156,6 +156,8 @@
         </form>
     </div>
 
+    {%include "includes/message.html"%}
+
     {% for item in data %}
 
     <div class="col-lg-4">
@@ -169,7 +171,9 @@
         <h4>{{item[3]}}</h4>
         {{item[4]}} stars out of 5
         <p><br /></p>
-        <div><button type="button" class="button">Add To Cart</button></div>
+        <form action="/addToCart/{{item[0]}}">
+            <div><button type="submit" class="button">Add To Cart</button></div>
+        </form>
         <div>
             <p><br /></p>
             <p>{{item[5]}}</p>

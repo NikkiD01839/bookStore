@@ -360,11 +360,15 @@ def cart():
     bookId = db.execute("SELECT bookId FROM cart WHERE userId=:userId", {
         "userId": userId[0]}).fetchall()
     data = []
+    total = 0
+    i = 0
     for x in bookId:
         data.append(db.execute("SELECT title,price,pic_location FROM books WHERE id=:bookId", {
             "bookId": x[0]}).fetchall())
-
-    return render_template("viewCart.html", data=data)
+        total += data[i][0][1]
+        i+=1
+    print(total)
+    return render_template("viewCart.html", data=data, total=total)
 
 # view remove from cart
 @app.route("/removeFromCart/<title>", methods=["GET", "POST"])
