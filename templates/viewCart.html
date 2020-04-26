@@ -1,138 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Bootstrap Theme Company</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .jumbotron {
+            background-color: #f4511e;
+            color: #ffffff;
+            padding: 100px 25px;
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #f4511e;
+            z-index: 9999;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: #fff !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #f4511e !important;
+            background-color: #fff !important;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+        }
+
+        .form-inline input:required {
+            border-color: #3e1ef4;
+        }
+    </style>
+
 </head>
+
 <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Bookstore Website</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if session.log %}
+                    <li><a href="/logout">LOG OUT</a></li>
+                    <li><a href="/user">VIEW ACCOUNT</a></li>
+                    <li><a href="/cart">VIEW CART</a></li>
+                    {% else  %}
+                    <li><a href="/login">LOGIN/REGISTER</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<style>
-    .jumbotron{
-        background-color: #f4511e; /* Orange */
-        color: #ffffff;
-        text-align: center;
-    }
-    .item span {
-        font-style: normal;
-    }
-
-    .navbar {
-         margin-bottom: 0;
-        background-color: #f4511e;
-        z-index: 9999;
-        border: 0;
-        font-size: 12px !important;
-        line-height: 1.42857143 !important;
-        letter-spacing: 4px;
-        border-radius: 0;
-    }
-
-    .navbar li a, .navbar .navbar-brand {
-        color: #fff !important;
-    }
-
-    .navbar-nav li a:hover, .navbar-nav li.active a {
-        color: #f4511e !important;
-        background-color: #fff !important;
-    }
-
-    .navbar-default .navbar-toggle {
-        border-color: transparent;
-        color: #fff !important;
-    }
-
-    body {
-        font: 400 15px Lato, sans-serif;
-        line-height: 1.8;
-        color: #818181;
-    }
-
-    .jumbotron {
-        font-family: Montserrat, sans-serif;
-    }
-
-    .navbar {
-        font-family: Montserrat, sans-serif;
-    }
-
-    footer .glyphicon {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #f4511e;
-    }
-  </style>
-
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Bookstore Website</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        {% if session.log %}
-        <li><a href="/logout">LOG OUT</a></li>
-        <li><a href="/user">VIEW ACCOUNT</a></li>
-        <li><a href="/cart">VIEW CART</a></li>
-        {% else  %}
-        <li><a href="/login">LOGIN/REGISTER</a></li>
-        {% endif %}
-        </ul>
-      </div>
+    <div class="jumbotron">
+      <h1>VIEW CART</h1>
     </div>
-  </nav>
-
-
-<div class="jumbotron">   
-    <h1>VIEW CART</h1>
-</div>
-
-<div class="container-fluid bg-grey">
-    {% for item in data %}
-
-    <div class="col-lg-4">
+  
+    <div class="container-fluid bg-grey">
+      {% for item in data %}
+  
+      <div class="col-lg-4">
         <img class="card-img-top img-fluid" src={{item[2]}} alt={{item[0]}}>
-    </div>
-    <div class="col-lg-8">
+      </div>
+      <div class="col-lg-8">
         <h3 class="card-title">
-            <p><strong>{{item[0]}}</strong></p>
+          <p><strong>{{item[0]}}</strong></p>
         </h3>
         <h4>{{item[3]}}</h4>
         <p><br /></p>
         <div><button type="button" class="button">Remove From Cart</button></div>
         <div>
-            <p><br /></p>
-            <p>{{item[5]}}</p>
+          <p><br /></p>
+          <p>{{item[5]}}</p>
         </div>
         {{item[6]}}
-    </div>
-
-    {% endfor %}
-  <h3>Promo Code: </h3> 
-  <input type="text" id="promo" name="promo" value="PROMOCODE">
-  <input type="button" id="promoenter" name="promoenter" value="enter"> 
-  <h2>Total Price: </h2>
-
-  <p><button class="btn" type="submit">Proceed To Purchase</button></p>
-
-<p><br /></p>
-
-    <footer class="container-fluid text-center">
-      <p><br /></p>
-      <a href="#myPage" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-      </a>
-      <p>Bootstrap Theme Modified From: <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a></p>
-    </footer>
+      </div>
+  
+      {% endfor %}
+      <h3>Promo Code: </h3>
+      <input type="text" id="promo" name="promo" value="PROMOCODE">
+      <input type="button" id="promoenter" name="promoenter" value="enter">
+      <h2>Total Price: </h2>
+  
+      <p><button class="btn" type="submit">Proceed To Purchase</button></p>
+  
 
 </body>
+
 </html>
