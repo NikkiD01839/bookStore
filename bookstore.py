@@ -353,13 +353,14 @@ def addBook():
         publisher = request.form.get("publisher")
         pubYear = request.form.get("pubYear")
         sellPrice = request.form.get("sellPrice")
+        quantity = request.form.get("quantity")
 
-        db.execute("INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location, edition, publisher, pubYear, salePrice) VALUES (:title, :author, :price, :rating, :genre, :isbn, :synopsis, :pic, :edition, :publisher, :pubYear, :salePrice)",
+        db.execute("INSERT INTO books (title, author, price, rating, genre, ISBN, synopsis, pic_location, edition, publisher, pubYear, salePrice, quantity) VALUES (:title, :author, :price, :rating, :genre, :isbn, :synopsis, :pic, :edition, :publisher, :pubYear, :salePrice, :quantity)",
                    {
                        "title": title, "author": author, "price": price,
                        "rating": rating, "genre": genre, "isbn": isbn,
                        "synopsis": synopsis, "pic": pic, "edition": edition,
-                       "publisher": publisher, "pubYear": pubYear, "salePrice": sellPrice})
+                       "publisher": publisher, "pubYear": pubYear, "salePrice": sellPrice, "quantity" : quantity})
 
         db.commit()
         flash("Book Added", "success")
@@ -402,8 +403,9 @@ def cart():
             "bookId": x[0]}).fetchall())
         total += data[i][0][1]
         i += 1
-    print(total)
-    return render_template("viewCart.html", data=data, total=total)
+    discount = 0
+    promoUsed = False
+    return render_template("viewCart.html", data=data, total=total, discount=discount, promoUsed=promoUsed)
 
 # view remove from cart
 @app.route("/removeFromCart/<title>", methods=["GET", "POST"])
@@ -472,6 +474,68 @@ def paymentInfo():
 
     return render_template("bookOrderPaymentInfo.html", data=data, stuffExists=stuffExists)
 
+# manage promotion
+@app.route("/managePromotion/<total>", methods=["GET", "POST"])
+def managePromotion(total):
+    email = session['USER']
+    userId = db.execute("SELECT id FROM users WHERE email=:email", {
+        "email": email}).fetchone()
+    bookId = db.execute("SELECT bookId FROM cart WHERE userId=:userId", {
+        "userId": userId[0]}).fetchall()
+    data = []
+    i = 0
+    for x in bookId:
+        data.append(db.execute("SELECT title,price,pic_location FROM books WHERE id=:bookId", {
+            "bookId": x[0]}).fetchall())
+        i += 1
+    
+    promo_code = request.form.get("promo_code")
+    discountData = db.execute("SELECT discount FROM promotions WHERE promo_code=:promo_code", {
+                                  "promo_code": promo_code}).fetchone()
+    discount = 0
+    if discountData is not None:
+        promoUsed = True
+        discount = discountData[0]
+        total = float(total)
+        total *= (1.0-discount)
+        total  = '%.2f'%total
+        discount *= 100 
+        discount = int(discount)
+        flash("Promotion added!","success")
+
+    else:
+        promoUsed = False
+        flash("Promotion Code Invalid","danger")
+    return render_template("viewCart.html", data=data, total=total, discount=discount, promoUsed=promoUsed)
+
+# purchase
+@app.route("/purchase", methods=["GET", "POST"])
+def purchase():
+    email = session['USER']
+
+    userId = db.execute("SELECT id FROM users WHERE email=:email", {
+        "email": email}).fetchone()
+
+    books = db.execute("SELECT bookId FROM cart WHERE userId=:userId", {"userId" : userId[0]}).fetchall()
+
+    for x in books:
+        quantityData = db.execute("SELECT quantity FROM books WHERE id=:bookId", {"bookId" : x[0]}).fetchone()
+        if (quantityData[0] <= 0):
+            bookTitle = db.execute("SELECT title FROM books WHERE id=:bookId", {"bookId" : x[0]}).fetchone()
+            flash("Not enough books of " + bookTitle[0] + " in stock. Remove from cart","danger")
+            return redirect(url_for('cart'))
+
+    for x in books:
+        quantityData = db.execute("SELECT quantity FROM books WHERE id=:bookId", {"bookId" : x[0]}).fetchone()
+        quantity = quantityData[0] - 1
+        db.execute("UPDATE books SET quantity=:quantity WHERE id=:bookId", {
+                       "quantity": quantity, "bookId": x[0]})
+        db.commit()
+
+    db.execute("DELETE FROM cart WHERE userId=:userId", {"userId" : userId[0]})
+    db.commit()
+    flash("Thank you for you business!", "success")
+    return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.secret_key = "key"

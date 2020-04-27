@@ -174,9 +174,11 @@
         <h4>{{item[3]}}</h4>
         {{item[4]}} stars out of 5
         <p><br /></p>
+        {% if session.log %}
         <form action="/addToCart/{{item[0]}}">
             <div><button type="submit" class="button">Add To Cart</button></div>
         </form>
+        {% endif %}
         <div>
             <p><br /></p>
             <p>{{item[5]}}</p>

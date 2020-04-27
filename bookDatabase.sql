@@ -38,7 +38,7 @@ create table promotions (
 );
 
 INSERT INTO promotions (promo_code, discount)
-VALUES ("123CODE", 5);
+VALUES ("123CODE", 0.25);
 
 create table cart(
 	id int PRIMARY KEY NOT NULL AUTO_INCREMENT, 

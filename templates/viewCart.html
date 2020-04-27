@@ -109,29 +109,37 @@
 
   {%include "includes/message.html"%}
   <div class="grid">
-      {% for item in data %}
-        <img class="card-img-top img-fluid" src={{item[0][2]}} alt={{item[0][0]}}>
-        <h3 class="card-title">
-          <p><strong>{{item[0][0]}}</strong></p>
-        </h3>
-        <h4>{{item[0][1]}}</h4>
-        <p><br /></p>
-        <form action="/removeFromCart/{{item[0][0]}}" method="POST">
-          <div><button type="submit" class="button">Remove From Cart</button></div>
-        </form>
-      <p><br /></p>
-      </div>
-  
+    {% for item in data %}
+    <img class="card-img-top img-fluid" src={{item[0][2]}} alt={{item[0][0]}}>
+    <h3 class="card-title">
+      <p><strong>{{item[0][0]}}</strong></p>
+    </h3>
+    <h4>{{item[0][1]}}</h4>
+    <p><br /></p>
+    <form action="/removeFromCart/{{item[0][0]}}" method="POST">
+      <div><button type="submit" class="button">Remove From Cart</button></div>
+    </form>
+    <p><br /></p>
+  </div>
+
 
   {% endfor %}
 
-  
+
 
 
   <h3>Promo Code: </h3>
-  <input type="text" id="promo" name="promo" value="PROMOCODE">
-  <input type="button" id="promoenter" name="promoenter" value="enter">
-  <h2>Total Price: {{total}}</h2>
+  <form action="/managePromotion/{{total}}" method="POST">
+    <input type="text" id="promo" name="promo_code" value="PROMOCODE">
+    <button type="submit" class="button">Enter Promo Code</button>
+  </form>
+  {% if not promoUsed %}
+  <h2>Total Price: ${{total}}</h2>
+  {% else %}
+  <div>Discount given with Promo Code: {{discount}}%</div>
+  <h2>New Total Price: ${{total}}</h2>
+  {% endif %}
+
 
 
   <form action="/paymentInfo">
