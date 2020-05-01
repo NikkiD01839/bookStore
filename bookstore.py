@@ -197,6 +197,11 @@ def forget_password():
             return redirect(url_for('login'))
     return render_template("forgetPassword.html")
 
+# redirects for password
+@app.route("/redirect_pass", methods=["GET", "POST"])
+def redirect_pass():
+    return render_template("changePassword.html")
+
 # change password
 @app.route("/change_password", methods=["GET", "POST"])
 def change_password():
@@ -520,6 +525,7 @@ def purchase():
 
     for x in books:
         quantityData = db.execute("SELECT quantity FROM books WHERE id=:bookId", {"bookId" : x[0]}).fetchone()
+        quantity = quantityData[0] - 1
         if (quantityData[0] <= 0):
             bookTitle = db.execute("SELECT title FROM books WHERE id=:bookId", {"bookId" : x[0]}).fetchone()
             flash("Not enough books of " + bookTitle[0] + " in stock. Remove from cart","danger")
